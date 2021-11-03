@@ -1,1 +1,1 @@
-oh-my-posh --init --shell pwsh --config ~/jandedobbeleer.omp.json | Invoke-Expression
+oh-my-posh --init --shell pwsh --config C:\github\prompt\my-ohmyposh.json | Invoke-Expression
