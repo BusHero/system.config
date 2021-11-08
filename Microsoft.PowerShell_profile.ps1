@@ -665,7 +665,8 @@ Set-PSReadLineKeyHandler -Key Alt+a `
 
 
 Set-PSReadLineOption -PredictionSource History
-Set-PSReadLineOption -PredictionViewStyle ListView
+# TODO To enabled when the PSReadLine will get updated to version 2.2
+# Set-PSReadLineOption -PredictionViewStyle ListView
 Set-PSReadLineOption -EditMode Windows
 
 
