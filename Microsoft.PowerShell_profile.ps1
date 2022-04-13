@@ -1,6 +1,6 @@
 using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
- 
+function make { Invoke-Pester } 
 if ($host.Name -eq 'ConsoleHost')
 {
     Import-Module PSReadLine
