@@ -2,7 +2,7 @@ using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
 
 New-Alias -Name touch -Value New-Item
- 
+
 if ($host.Name -eq 'ConsoleHost') {
 	Import-Module PSReadLine
 }

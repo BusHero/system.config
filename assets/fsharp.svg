@@ -11,38 +11,38 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
-     id="defs14" />
+	 id="defs14" />
   <sodipodi:namedview
-     id="namedview12"
-     pagecolor="#505050"
-     bordercolor="#eeeeee"
-     borderopacity="1"
-     inkscape:pageshadow="0"
-     inkscape:pageopacity="0"
-     inkscape:pagecheckerboard="0"
-     showgrid="false"
-     inkscape:zoom="2.4085825"
-     inkscape:cx="77.431436"
-     inkscape:cy="116.45854"
-     inkscape:window-width="1920"
-     inkscape:window-height="1057"
-     inkscape:window-x="-8"
-     inkscape:window-y="-8"
-     inkscape:window-maximized="1"
-     inkscape:current-layer="svg10" />
+	 id="namedview12"
+	 pagecolor="#505050"
+	 bordercolor="#eeeeee"
+	 borderopacity="1"
+	 inkscape:pageshadow="0"
+	 inkscape:pageopacity="0"
+	 inkscape:pagecheckerboard="0"
+	 showgrid="false"
+	 inkscape:zoom="2.4085825"
+	 inkscape:cx="77.431436"
+	 inkscape:cy="116.45854"
+	 inkscape:window-width="1920"
+	 inkscape:window-height="1057"
+	 inkscape:window-x="-8"
+	 inkscape:window-y="-8"
+	 inkscape:window-maximized="1"
+	 inkscape:current-layer="svg10" />
   <g
-     id="g8">
-    <path
-       d="M 5,63  61,7  61,35  33,63  61,91  61,119  5,63 Z"
-       style="fill:#378bba"
-       id="path2" />
-    <path
-       d="M 41,63 61,43 61,83 41,63 Z"
-       style="fill:#378bba"
-       id="path4" />
-    <path
-       d="M123,63  65,7  65,35  93,63  65,91  65,119  123,63 Z"
-       style="fill:#30b9db"
-       id="path6" />
+	 id="g8">
+	<path
+	   d="M 5,63  61,7  61,35  33,63  61,91  61,119  5,63 Z"
+	   style="fill:#378bba"
+	   id="path2" />
+	<path
+	   d="M 41,63 61,43 61,83 41,63 Z"
+	   style="fill:#378bba"
+	   id="path4" />
+	<path
+	   d="M123,63  65,7  65,35  93,63  65,91  65,119  123,63 Z"
+	   style="fill:#30b9db"
+	   id="path6" />
   </g>
 </svg>
