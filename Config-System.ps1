@@ -14,4 +14,7 @@ Set-Profile -BaseProfile $ProfilePath -SpecificProfile "${env:USERPROFILE}\Docum
 Set-Profile -BaseProfile $ProfilePath -SpecificProfile "${env:USERPROFILE}\Documents\WindowsPowerShell\profile.ps1"
 
 # Set up windows terminal profile
-Copy-Item -Path .\WindowsTerminal\settings.json -Destination "${env:LOCALAPPDATA}\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" -Force
+Copy-Item -Path ".\WindowsTerminal\settings.json" -Destination "${env:LOCALAPPDATA}\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" -Force
+
+# Set up nvim
+Copy-Item -Path ".\nvim\init.vim" -Destination "${env:LOCALAPPDATA}\nvim\init.vim" -Force
