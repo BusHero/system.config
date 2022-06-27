@@ -8,8 +8,7 @@ if ($host.Name -eq 'ConsoleHost') {
 }
 Import-Module -Name Terminal-Icons
 
-oh-my-posh --init --shell pwsh --config C:\github\prompt\my-ohmyposh.json | Invoke-Expression
-
+oh-my-posh --init --shell pwsh --config 'C:\.config\ohmyposh\prompt\my-ohmyposh.json' | Invoke-Expression
 
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 	param($wordToComplete, $commandAst, $cursorPosition)
