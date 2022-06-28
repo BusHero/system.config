@@ -70,6 +70,20 @@
 				"source": "Windows.Terminal.PowershellCore"
 			},
 			{
+				"backgroundImage": "C:\\.config\\assets\\ps.png",
+				"backgroundImageAlignment": "bottomRight",
+				"backgroundImageOpacity": 0.5,
+				"backgroundImageStretchMode": "none",
+				"colorScheme": "Campbell",
+				"commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\"",
+				"elevate": true,
+				"guid": "{aa934ce8-8666-4d02-8e3e-978e96d8f2ff}",
+				"hidden": false,
+				"icon": "ms-appx:///ProfileIcons/pwsh.png",
+				"name": "PowerShell (Admin)",
+				"startingDirectory": "%USERPROFILE%"
+			},
+			{
 				"guid": "{61c54bbd-c2c6-5271-96e7-009a87ff44bf}",
 				"hidden": false,
 				"name": "Windows PowerShell"
@@ -89,19 +103,13 @@
 				"hidden": false,
 				"name": "Ubuntu",
 				"source": "Windows.Terminal.Wsl",
-				"startingDirectory": null
+				"startingDirectory": "%USERPROFILE%"
 			},
 			{
 				"guid": "{b453ae62-4e3d-5e58-b989-0a998ec441b8}",
 				"hidden": true,
 				"name": "Azure Cloud Shell",
 				"source": "Windows.Terminal.Azure"
-			},
-			{
-				"guid": "{2ece5bfe-50ed-5f3a-ab87-5cd4baafed2b}",
-				"hidden": true,
-				"name": "Git Bash",
-				"source": "Git"
 			},
 			{
 				"backgroundImage": "C:\\.config\\assets\\fsharp-164x164.png",
@@ -111,7 +119,6 @@
 				"commandline": "dotnet fsi",
 				"guid": "{f6b87c83-2a3e-4532-a00f-a6718dc741b3}",
 				"icon": "C:\\.config\\assets\\fsharp-32x32.png",
-				"intenseTextStyle": "bright",
 				"name": "fSharp"
 			},
 			{
@@ -130,23 +137,10 @@
 				"backgroundImageAlignment": "bottomRight",
 				"backgroundImageOpacity": 0.5,
 				"backgroundImageStretchMode": "none",
-				"commandline": "%PYTHON_HOME%/python.exe",
+				"commandline": "python.exe",
 				"guid": "{583ea88d-5e64-41be-abaf-675d42e3d43e}",
 				"icon": "C:\\.config\\assets\\python-32x32.png",
 				"name": "Python"
-			},
-			{
-				"backgroundImage": "C:\\.config\\assets\\ps.png",
-				"backgroundImageAlignment": "bottomRight",
-				"backgroundImageOpacity": 0.5,
-				"backgroundImageStretchMode": "none",
-				"colorScheme": "Campbell",
-				"commandline": "gsudo \"C:\\Users\\petru\\AppData\\Local\\Microsoft\\WindowsApps\\Microsoft.PowerShell_8wekyb3d8bbwe\\pwsh.exe\"",
-				"guid": "{c25781bf-3542-4035-813c-aeb6f157645a}",
-				"hidden": false,
-				"icon": "ms-appx:///ProfileIcons/pwsh.png",
-				"name": "PowerShell (Administrator)",
-				"startingDirectory": "%USERPROFILE%"
 			},
 			{
 				"guid": "{d34e4258-e15e-54ae-b7e5-966a3bd27bd9}",
@@ -166,6 +160,13 @@
 				"hidden": true,
 				"name": "Developer Command Prompt for VS 2017",
 				"source": "Windows.Terminal.VisualStudio"
+			},
+			{
+				"guid": "{43c7abe9-3db3-4197-9089-ae7112241d2a}",
+				"startingDirectory": "%USERPROFILE%",
+				"commandline": "%PROGRAMFILES%\\Git\\bin\\bash.exe",
+				"name": "Git Bash",
+				"icon": "C:\\.config\\assets\\git-bash.ico"
 			}
 		]
 	},
