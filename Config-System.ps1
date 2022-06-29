@@ -18,3 +18,4 @@ Copy-Item -Path "${PSScriptRoot}\WindowsTerminal\settings.json" -Destination "${
 
 # Set up nvim
 Copy-Item -Path "${PSScriptRoot}\nvim\init.vim" -Destination "${env:LOCALAPPDATA}\nvim\init.vim" -Force
+Copy-Item -Path "${PSScriptRoot}\nvim\coc-settings.json" -Destination "${env:LOCALAPPDATA}\nvim\coc-settings.json"
