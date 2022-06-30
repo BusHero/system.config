@@ -24,7 +24,6 @@ Plug 'https://github.com/pboettch/vim-cmake-syntax'
 Plug 'neovim/nvim-lspconfig'
 
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
