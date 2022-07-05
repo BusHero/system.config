@@ -12,3 +12,6 @@ Write-Host 'Setup Jetbrains ... '
 
 Write-Host 'Setup Git ... '
 . "${PSSCriptRoot}\git\setup.ps1"
+
+Write-Host 'Setup wsl ... '
+. "${PSSCriptRoot}\wsl\setup.ps1"

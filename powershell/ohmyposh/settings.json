@@ -5,6 +5,20 @@
 			"alignment": "left",
 			"segments": [
 				{
+					"type": "shell",
+					"style": "powerline",
+					"powerline_symbol": "\uE0B0",
+					"foreground": "#ffffff",
+					"background": "#0077c2",
+					"properties": {
+						"mapped_shell_names": {
+							"pwsh": "PS",
+							"bash": "bash",
+							"zsh": "zsh"
+						}
+					}
+				},
+				{
 					"background": "#ff479c",
 					"foreground": "#ffffff",
 					"leading_diamond": "\ue0b6",

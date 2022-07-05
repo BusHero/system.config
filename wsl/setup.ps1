@@ -1,0 +1,1 @@
+wsl cp /mnt/c/.config/wsl/.bashrc ~/.bashrc
