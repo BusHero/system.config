@@ -5,23 +5,16 @@
 			"alignment": "left",
 			"segments": [
 				{
-					"type": "shell",
-					"style": "powerline",
+					"style": "plain",
 					"powerline_symbol": "\uE0B0",
 					"foreground": "#ffffff",
-					"background": "#0077c2",
-					"properties": {
-						"mapped_shell_names": {
-							"pwsh": "PS",
-							"bash": "bash",
-							"zsh": "zsh"
-						}
-					}
+					"background": "transparent",
+					"template": " {{.Icon}}: ",
+					"type": "os"
 				},
 				{
 					"background": "#ff479c",
 					"foreground": "#ffffff",
-					"leading_diamond": "\ue0b6",
 					"powerline_symbol": "\ue0b0",
 					"properties": {
 						"style": "folder"
@@ -34,7 +27,6 @@
 				{
 					"background": "#fffb38",
 					"foreground": "#193549",
-					"powerline_symbol": "\ue0b0",
 					"properties": {
 						"fetch_stash_count": true,
 						"fetch_status": true,
