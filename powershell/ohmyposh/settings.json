@@ -15,7 +15,10 @@
 					"background": "#ff479c",
 					"foreground": "#ffffff",
 					"properties": {
-						"style": "folder"
+						"style": "agnoster",
+						"mapped_locations": {
+							"C:\\temp": "\ue799"
+						}
 					},
 					"style": "diamond",
 					"template": " \ue5ff {{ .Path }} ",
