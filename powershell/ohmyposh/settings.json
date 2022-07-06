@@ -49,6 +49,17 @@
 					"type": "dotnet"
 				},
 				{
+					"type": "wifi",
+					"style": "powerline",
+					"background": "#8822ee",
+					"foreground": "#222222",
+					"background_templates": [
+						"{{ if (lt .Signal 60) }}#DDDD11{{ else if (lt .Signal 90) }}#DD6611{{ else }}#11CC11{{ end }}"
+					],
+					"powerline_symbol": "\uE0B0",
+					"template": "\uFAA8 {{ .SSID }} {{ .Signal }}%"
+				},
+				{
 					"background": "#2e9599",
 					"background_templates": [
 						"{{ if gt .Code 0 }}#f1184c{{ end }}"
@@ -59,7 +70,7 @@
 						"always_enabled": true
 					},
 					"style": "powerline",
-					"template": " \ue23a{{ if gt .Code 0 }}\uf00d{{ else }}\uf42e{{ end }} ",
+					"template": " \ue23a{{ if gt .Code 0 }} \uf00d{{ else }} \uf42e{{ end }} ",
 					"type": "exit"
 				}
 			],
