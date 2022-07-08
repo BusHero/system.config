@@ -1,1 +1,3 @@
-wsl cp /mnt/c/.config/wsl/.bashrc ~/.bashrc
+$root = wsl wslpath -u $PSScriptRoot.Replace('\', '\\')
+
+wsl cp "${root}/.bashrc" ~/.bashrc
