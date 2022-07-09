@@ -22,16 +22,12 @@ Plug 'https://github.com/Raimondi/delimitMate'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'https://github.com/pboettch/vim-cmake-syntax'
 Plug 'neovim/nvim-lspconfig'
-
 Plug 'neoclide/coc.nvim', {'do': 'yarn install --frozen-lockfile'}
-
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
-
-" For vsnip users.
 Plug 'hrsh7th/cmp-vsnip'
 Plug 'hrsh7th/vim-vsnip'
 
