@@ -15,3 +15,9 @@ Set-Profile -BaseProfile $ProfilePath `
 			-SpecificProfile "${env:USERPROFILE}\Documents\PowerShell\profile.ps1"
 Set-Profile -BaseProfile $ProfilePath `
 			-SpecificProfile "${env:USERPROFILE}\Documents\WindowsPowerShell\profile.ps1"
+
+# Setup modules
+#  - PSScriptAnalyzer 
+#  - PSCX
+#  - Pester
+#  - Install-Font
