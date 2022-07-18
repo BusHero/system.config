@@ -76,6 +76,7 @@
 				"backgroundImageStretchMode": "none",
 				"colorScheme": "Campbell",
 				"guid": "{58c0dd82-e3e5-407e-b326-7230c9cdd66a}",
+				"commandline": "powershell -NoProfile",
 				"hidden": false,
 				"name": "PowerShell (NoProfile)",
 				"icon": "ms-appx:///ProfileIcons/pwsh.png",
