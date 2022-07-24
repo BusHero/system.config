@@ -1,9 +1,9 @@
-BeforeAll {
+# BeforeAll {
 
-}
+# }
 
 Describe 'Check Neovim options were set correctly' {
-	It 'Line numbers options is turned on' {
-		$Destination | should -Be "foo"
+	It 'Config path should be the set up one' {
+		nvim --headless +"echo stdpath('config')" +q | Should -Be "C:\Users\Petru\AppData\Local\nvim"
 	}
 }
