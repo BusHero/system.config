@@ -3,14 +3,15 @@
 	"blocks": [
 		{
 			"alignment": "left",
-			"segments": [{
-  "type": "root",
-  "style": "powerline",
-  "powerline_symbol": "\uE0B0",
-  "foreground": "#111111",
-  "background": "#ffff66",
-  "template": "\uF0E7"
-},
+			"segments": [
+				{
+					"type": "root",
+					"style": "powerline",
+					"powerline_symbol": "\uE0B0",
+					"foreground": "#111111",
+					"background": "#ffff66",
+					"template": "\uF0E7"
+				},
 				{
 					"style": "plain",
 					"foreground": "#ffffff",
@@ -69,7 +70,7 @@
 				{
 					"background": "#2e9599",
 					"background_templates": [
-						"{{ if gt .Code 0 }}#f1184c{{ end }}"
+						"{{ if ne .Code 0 }}#f1184c{{ end }}"
 					],
 					"foreground": "#ffffff",
 					"powerline_symbol": "\ue0b0",
@@ -77,7 +78,7 @@
 						"always_enabled": true
 					},
 					"style": "powerline",
-					"template": " \ue23a{{ if gt .Code 0 }} \uf00d{{ else }} \uf42e{{ end }} ",
+					"template": " \ue23a{{ if eq .Code 0 }} \uf42e{{ else }} \uf00d{{ end }} ",
 					"type": "exit"
 				}
 			],
