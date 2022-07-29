@@ -1,6 +1,6 @@
 param(
 	[string]
-	$XdgConfigHome
+	$XdgConfigHome = '%LOCALAPPDATA%'
 )
 
 [System.Environment]::SetEnvironmentVariable('XDG_CONFIG_HOME', $XdgConfigHome, 'User')
