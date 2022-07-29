@@ -4,33 +4,43 @@ BeforeAll {
 
 Describe 'Check Neovim options were set correctly' -ForEach @(
 	@{
-		Parameters            = @{ XdgConfigHome = 'C:\foo'; XdgDataHome = 'C:\bar' };
-		ExpectedXdgConfigHome = 'C:\foo'
-		ExpectedXdgDataHome   = 'C:\bar'
+		Config     = @{
+			Variables = @{ 
+				XDG_CONFIG_HOME = 'C:\foo'; 
+				XDG_DATA_HOME   = 'C:\bar' 
+			}
+		}
+		Parameters = @{ XdgConfigHome = 'C:\foo'; XdgDataHome = 'C:\bar' };
 	}
 	@{
-		Parameters            = @{ XdgConfigHome = 'C:\foo'; };
-		ExpectedXdgConfigHome = 'C:\foo'
-		ExpectedXdgDataHome   = '%LOCALAPPDATA%'
+		Config     = @{
+			Variables = @{ 
+				XDG_CONFIG_HOME = 'C:\foo'; 
+			}
+		};
+		Parameters = @{ XdgConfigHome = 'C:\foo'; };
 	}
 	@{
-		Parameters            = @{  XdgDataHome = 'C:\bar' };
-		ExpectedXdgConfigHome = '%LOCALAPPDATA%'
-		ExpectedXdgDataHome   = 'C:\bar'
+		Config = @{
+			Variables = @{  
+				XDG_DATA_HOME = 'C:\bar' 
+			};
+		} 
 	}
 	@{
-		Parameters            = @{ };
-		ExpectedXdgConfigHome = '%LOCALAPPDATA%'
-		ExpectedXdgDataHome   = '%LOCALAPPDATA%'
+		Config = @{
+			Variables = {
+			}
+		}
 	}
 ) {
 	It 'Config path should be the set up one' {
 		Mock-EnvironmentVariable -Variable 'XDG_CONFIG_HOME', 'XDG_DATA_HOME' -Targets User, Process -Fixture {
-			. $path @Parameters
-			[Environment]::GetEnvironmentVariable('XDG_CONFIG_HOME', 'Process') | Should -Be $ExpectedXdgConfigHome 
-			[Environment]::GetEnvironmentVariable('XDG_CONFIG_HOME', 'User') | Should -Be $ExpectedXdgConfigHome 
-			[Environment]::GetEnvironmentVariable('XDG_DATA_HOME', 'Process') | Should -Be $ExpectedXdgDataHome 
-			[Environment]::GetEnvironmentVariable('XDG_DATA_HOME', 'User') | Should -Be $ExpectedXdgDataHome 
+			. $path -Config $config
+			foreach ($variable in $config.Variables.Keys) {
+				[Environment]::GetEnvironmentVariable($variable, 'Process') | Should -Be $Config.Variables.$variable 
+				[Environment]::GetEnvironmentVariable($variable, 'User') | Should -Be $Config.Variables.$variable 
+			}
 		}
 	}
 }

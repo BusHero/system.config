@@ -1,13 +1,9 @@
 param(
-	[string]
-	$XdgConfigHome = '%LOCALAPPDATA%',
-
-	[string]
-	$XdgDataHome = '%LOCALAPPDATA%'
+	[hashtable]
+	$Config
 )
 
-[System.Environment]::SetEnvironmentVariable('XDG_CONFIG_HOME', $XdgConfigHome, 'User')
-[System.Environment]::SetEnvironmentVariable('XDG_CONFIG_HOME', $XdgConfigHome, 'Process')
-
-[System.Environment]::SetEnvironmentVariable('XDG_DATA_HOME', $XdgDataHome, 'User')
-[System.Environment]::SetEnvironmentVariable('XDG_DATA_HOME', $XdgDataHome, 'Process')
+foreach ($variable in $config.Variables.Keys) {
+	[System.Environment]::SetEnvironmentVariable($variable, $Config.Variables.$variable, 'User')
+	[System.Environment]::SetEnvironmentVariable($variable, $Config.Variables.$variable, 'Process')
+}
