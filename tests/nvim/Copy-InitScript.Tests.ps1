@@ -1,4 +1,7 @@
 BeforeAll {
+	$ProjectRoot = Get-ProjectRoot -Path $PSScriptRoot -Markers .git
+	$config = "${ProjectRoot}\nvim\init.lua"
+
 	function script:Copy-InitScript {
 		. "$(Get-ScriptPath -Path $PSCommandPath -SourceDirectory '')" @args
 	}
@@ -13,7 +16,9 @@ Describe 'parent directory' {
 			}
 		}
 		It 'init.lua is copied to the right location' {
-			"${path}\nvim\init.lua" | Should -Exist
+			$Expected = Get-Content -Path $config 
+			$Actual = Get-Content "${path}\nvim\init.lua"
+			$Actual | Should -Be $Expected
 		}
 	}
 
@@ -26,13 +31,33 @@ Describe 'parent directory' {
 				Copy-InitScript
 			}
 		}
+		
+		It 'init.lua is copied to the right location' {
+			$Expected = Get-Content -Path $config 
+			$Actual = Get-Content "${path}\nvim\init.lua"
+			$Actual | Should -Be $Expected
+		}
+	}
 
-		It '<file> exists' {
-			$file | Should -Exist
+	Describe 'Backup' {
+		BeforeAll {
+			$OriginalValue = 'Some value here and there'
+			$path = "${TestDrive}\this\directory\does\exists"
+			New-Item -Path "${path}\nvim\init.lua" -ItemType File -Value $OriginalValue -Force > $null
+			Mock-EnvironmentVariable -Variable XDG_CONFIG_HOME -Value $path -Fixture {
+				Copy-InitScript
+			}
+		}
+		It 'original file is copied to the backup folder' {
+			"${path}\nvim\.backup\init.lua" | Should -Exist
 		}
 
-		It 'init.lua is copied to the right location' {
-			"${path}\nvim\init.lua" | Should -Exist
+		It 'Backuped file should have the same content' {
+			"${path}\nvim\.backup\init.lua" | Should -FileContentMatch $OriginalValue
+		}
+
+		It 'Make .backup a hidden folder' {
+			(Get-Item "${path}\nvim\.backup" -Force).Attributes | Should -Match Hidden
 		}
 	}
 }
