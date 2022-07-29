@@ -100,7 +100,7 @@ Describe 'parent directory' {
 		}
 
 		It 'original file is copied to the backup folder' {
-			"${path}\nvim\.backup\.backup" | Should -FileContentMatch 'Original value'
+			"${path}\nvim\.backup\.backup" | Should -FileContentMatch $OriginalValue
 		}
 
 		It 'Backuped file should have the same content' {
@@ -108,7 +108,7 @@ Describe 'parent directory' {
 		}
 
 		It 'Make .backup a hidden folder' {
-			(Get-Item "${path}\nvim\.backup" -Force).Attributes | Should -Not -Match Hidden
+			(Get-Item "${path}\nvim\.backup" -Force).Attributes | Should -Match Hidden
 		}
 	}
 }
