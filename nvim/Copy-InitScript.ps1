@@ -1,19 +1,19 @@
-$Destination = "${env:XDG_CONFIG_HOME}\nvim\init.lua"
+$parent = "${env:XDG_CONFIG_HOME}\nvim"
+$ConfigDestionation = "${parent}\init.lua"
+$BackupFolder = "${parent}\.backup"
 
-$parent = Split-Path -Path $Destination -Parent
+
 Write-Host "Ensure '$parent' directory exists ... "
 New-Item -Path $parent -ItemType Directory -Force > $null
 
 Write-Host 'Copy init.lua ... '
-if (Test-Path -Path $Destination) {
-	$root = Split-Path -Path $Destination -Parent
+if (Test-Path -Path $ConfigDestionation) {
 	
-	$backup = New-Item -Path "${root}\.backup" -ItemType Directory -Force
-	$backup.Attributes += 'Hidden'
-	Move-Item -Path $Destination -Destination "${root}\.backup" > $null
+	if ( !( Test-Path $BackupFolder -PathType Container )) {
+		$backup = New-Item -Path $BackupFolder -ItemType Directory -Force
+		$backup.Attributes += 'Hidden'
+	}
+	Move-Item -Path $ConfigDestionation -Destination $BackupFolder > $null
 }
 
-Copy-Item `
-	-Path "${PSScriptRoot}\init.lua" `
-	-Destination $Destination `
-	-Force > $null
+Copy-Item -Path "${PSScriptRoot}\init.lua" -Destination $ConfigDestionation -Force > $null

@@ -60,4 +60,27 @@ Describe 'parent directory' {
 			(Get-Item "${path}\nvim\.backup" -Force).Attributes | Should -Match Hidden
 		}
 	}
+
+	Describe 'Do not change .backup folder if it is already present' {
+		BeforeAll {
+			$OriginalValue = 'Some value here and there'
+			$path = "${TestDrive}\this\directory\does\exists"
+			New-Item -Path "${path}\nvim\init.lua" -ItemType File -Value $OriginalValue -Force > $null
+			New-Item -Path "${path}\nvim\.backup" -ItemType Directory -Force > $null
+			Mock-EnvironmentVariable -Variable XDG_CONFIG_HOME -Value $path -Fixture {
+				Copy-InitScript
+			}
+		}
+		It 'original file is copied to the backup folder' {
+			"${path}\nvim\.backup\init.lua" | Should -Exist
+		}
+
+		It 'Backuped file should have the same content' {
+			"${path}\nvim\.backup\init.lua" | Should -FileContentMatch $OriginalValue
+		}
+
+		It 'Make .backup a hidden folder' {
+			(Get-Item "${path}\nvim\.backup" -Force).Attributes | Should -Not -Match Hidden
+		}
+	}
 }
