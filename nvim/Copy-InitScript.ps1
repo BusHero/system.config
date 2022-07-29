@@ -1,4 +1,4 @@
-$Destination = "${env:LOCALAPPDATA}\nvim\init.lua"
+$Destination = "${env:XDG_CONFIG_HOME}\nvim\init.lua"
 
 New-Item `
 	-Path $Destination `
