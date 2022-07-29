@@ -1,12 +1,13 @@
 param(
 	[string]
-	$XdgConfigHome = '%LOCALAPPDATA%'
+	$XdgConfigHome = '%LOCALAPPDATA%',
+
+	[string]
+	$XdgDataHome = '%LOCALAPPDATA%'
 )
 
 [System.Environment]::SetEnvironmentVariable('XDG_CONFIG_HOME', $XdgConfigHome, 'User')
 [System.Environment]::SetEnvironmentVariable('XDG_CONFIG_HOME', $XdgConfigHome, 'Process')
 
-
-# [System.Environment]::SetEnvironmentVariable('XDG_DATA_HOME', $env:LOCALAPPDATA, 'User')
-# [System.Environment]::SetEnvironmentVariable('XDG_RUNTIME_DIR', '', 'User')
-# [System.Environment]::SetEnvironmentVariable('XDG_STATE_HOME', $env:LOCALAPPDATA, 'User')
+[System.Environment]::SetEnvironmentVariable('XDG_DATA_HOME', $XdgDataHome, 'User')
+[System.Environment]::SetEnvironmentVariable('XDG_DATA_HOME', $XdgDataHome, 'Process')
