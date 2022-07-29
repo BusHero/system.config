@@ -1,10 +1,10 @@
 $Destination = "${env:XDG_CONFIG_HOME}\nvim\init.lua"
 
-New-Item `
-	-Path $Destination `
-	-ItemType File `
-	-Force | Out-Null
+$parent = Split-Path -Path $Destination -Parent
+Write-Host "Ensure '$parent' directory exists ... "
+New-Item -Path $parent -ItemType Directory -Force > $null
 
+Write-Host 'Copy init.lua ... '
 Copy-Item `
 	-Path "${PSScriptRoot}\init.lua" `
 	-Destination $Destination `
