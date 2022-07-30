@@ -149,4 +149,64 @@ Describe 'parent directory' {
 			$Actual | Should -Be $Expected
 		}
 	}
+
+	Describe '.backup\init.1.lua exists' {
+		BeforeAll {
+			$OriginalValue = 'Some value here and there'
+			$BackupOriginalValue = 'Some value here and there'
+			$path = "${TestDrive}\$(New-Guid)"
+			New-Item -Path "${path}\nvim\init.lua" -ItemType File -Value $OriginalValue -Force > $null
+			New-Item -Path "${path}\nvim\.backup\init.lua" -ItemType File -Value $BackupOriginalValue -Force > $null
+			New-Item -Path "${path}\nvim\.backup\init.1.lua" -ItemType File -Value $BackupOriginalValue -Force > $null
+			Mock-EnvironmentVariable -Variable XDG_CONFIG_HOME -Value $path -Fixture {
+				Copy-InitScript
+			}
+		}
+
+		It 'original file is copied to the backup folder' {
+			"${path}\nvim\.backup\init.lua" | Should -FileContentMatch $BackupOriginalValue
+		}
+		
+		It 'original file is copied to the backup folder' {
+			"${path}\nvim\.backup\init.1.lua" | Should -FileContentMatch $BackupOriginalValue
+		}
+
+		It 'original file is copied to the backup folder' {
+			"${path}\nvim\.backup\init.2.lua" | Should -FileContentMatch $OriginalValue
+		}
+
+		It 'init.lua is copied to the right location' {
+			$Expected = Get-Content -Path $config 
+			$Actual = Get-Content "${path}\nvim\init.lua"
+			$Actual | Should -Be $Expected
+		}
+	}
+
+	Describe '.backup\init.1.lua exists' {
+		BeforeAll {
+			$OriginalValue = 'Some value here and there'
+			$BackupOriginalValue = 'Some value here and there'
+			$path = "${TestDrive}\$(New-Guid)"
+			New-Item -Path "${path}\nvim\init.lua" -ItemType File -Value $OriginalValue -Force > $null
+			New-Item -Path "${path}\nvim\.backup\init.9.lua" -ItemType File -Value $BackupOriginalValue -Force > $null
+			Mock-EnvironmentVariable -Variable XDG_CONFIG_HOME -Value $path -Fixture {
+				Copy-InitScript
+			}
+		}
+
+		It 'original file is copied to the backup folder' {
+			"${path}\nvim\.backup\init.9.lua" | Should -FileContentMatch $BackupOriginalValue
+		}
+
+		It 'original file is copied to the backup folder' {
+			"${path}\nvim\.backup\init.10.lua" | Should -FileContentMatch $OriginalValue
+		}
+
+		It 'init.lua is copied to the right location' {
+			$Expected = Get-Content -Path $config 
+			$Actual = Get-Content "${path}\nvim\init.lua"
+			$Actual | Should -Be $Expected
+		}
+	}
+
 }

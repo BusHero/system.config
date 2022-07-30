@@ -40,8 +40,14 @@ New-Item -Path $parent -ItemType Directory -Force > $null
 Write-Host 'Copy init.lua ... '
 if (Test-Path -Path $ConfigDestionation) {
 	EnsureBackupFolder -BackupFolder $BackupFolder
-	if (Test-Path -Path "${BackupFolder}\init.lua") {
-		Move-Item -Path $ConfigDestionation -Destination "${BackupFolder}\init.1.lua" > $null
+	if (Test-Path -Path "${BackupFolder}\init*.lua") {
+		$numbers = foreach ($file in Get-ChildItem "${BackupFolder}\init*.lua") {
+			$file -match 'init(?:\.(?<digit>\d+))?\.lua' > $null
+			[int]$matches.digit
+		} 
+		$currentIndex = $numbers | Sort-Object -Bottom 1
+		$backupDestionation = "${BackupFolder}\init.$($currentIndex + 1).lua"
+		Move-Item -Path $ConfigDestionation -Destination $backupDestionation > $null
 	}
 	else {
 		Move-Item -Path $ConfigDestionation -Destination $BackupFolder > $null
