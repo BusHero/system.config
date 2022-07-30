@@ -4,7 +4,7 @@ param(
 )
 
 foreach ($variable in $config.Variables.Keys) {
-	[System.Environment]::SetEnvironmentVariable($variable, $Config.Variables.$variable, 'User')
+	New-ItemProperty -Path 'HKCU:\Environment' -Name $variable -Value $Config.Variables.$variable -Force > $null
 	
 	$processValue = cmd /c "echo $($Config.Variables.$variable)"
 	[System.Environment]::SetEnvironmentVariable($variable, $processValue, 'Process')
