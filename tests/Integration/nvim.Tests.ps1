@@ -1,3 +1,7 @@
+BeforeDiscovery {
+	function script:Invoke-NeovimCommand([string]$command) { nvim --headless -c $command -c q 2>&1 }
+}
+	
 Describe 'Environment Variables' {
 	BeforeAll {
 		$script:projectRoot = Get-ProjectRoot -Path $PSScriptRoot -Markers .git
@@ -15,11 +19,11 @@ Describe 'Environment Variables' {
 	}
 
 	It 'NeoVim Config directory' {
-		nvim --headless -c 'echo stdpath(''config'')' -c q 2>&1 | Should -Be "$($env:XDG_CONFIG_HOME)\nvim"
+		Invoke-NeovimCommand -command 'echo stdpath(''config'')' | Should -Be "$($env:XDG_CONFIG_HOME)\nvim"
 	}
 
 	It 'NeoVim Data Directory' {
-		nvim --headless -c 'echo stdpath(''data'')' -c q 2>&1 | Should -Be "$($env:XDG_DATA_HOME)\nvim-data"
+		Invoke-NeovimCommand -command 'echo stdpath(''data'')' | Should -Be "$($env:XDG_DATA_HOME)\nvim-data"
 	}
 
 	It 'Config folder contains init.lua file' {
@@ -28,5 +32,9 @@ Describe 'Environment Variables' {
 
 	It 'Config folder should not contain init.vim file' {
 		"$($env:XDG_CONFIG_HOME)\nvim\init.vim" | Should -Not -Exist 
+	}
+
+	It 'Lines should be set on' {
+		Invoke-NeovimCommand -command 'set nu?' | Should -Match ' *number'
 	}
 }

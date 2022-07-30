@@ -5,3 +5,4 @@ vim.opt.shiftwidth = 4
 vim.opt.mouse = 'v'
 vim.opt.clipboard = 'unnamed'
 
+ 
