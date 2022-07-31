@@ -1,5 +1,36 @@
 BeforeDiscovery {
-	function script:Invoke-NeovimCommand([string]$command) { nvim --headless -c $command -c q 2>&1 }
+	function script:Invoke-NeovimCommand([string]$command) { 
+		$result = nvim --headless -c $command -c q 2>&1 
+		$result = [string[]]$result
+		$result = $result | Where-Object { !( $_ -eq 'System.Management.Automation.RemoteException') }
+		return [string[]]$result
+	}
+
+	enum OptionType {
+		Bool
+		Int
+		String
+		StringArray
+		IntArray
+	}
+
+	function script:Get-NeovimOption() {
+		param(
+			[string]
+			$option,
+
+			[OptionType]
+			$Type = [string]
+		)
+		switch ($Type) {
+			Int { return Invoke-NeovimCommand "lua =vim.opt.${option}:get()" -as [int] }
+			Bool { return Invoke-NeovimCommand "lua =vim.opt.${option}:get()" -as [bool] }
+			String { return Invoke-NeovimCommand "lua =vim.opt.${option}:get()" }
+			StringArray { return Invoke-NeovimCommand "lua for _, v in pairs(vim.opt.${option}:get()) do print(v) end" }
+			IntArray { return [int[]](Invoke-NeovimCommand "lua for _, v in pairs(vim.opt.${option}:get()) do print(v) end") }
+			Default { throw 'Unexpected option' }
+		}
+	}
 }
 	
 Describe 'Environment Variables' {
@@ -33,8 +64,32 @@ Describe 'Environment Variables' {
 	It 'Config folder should not contain init.vim file' {
 		"$($env:XDG_CONFIG_HOME)\nvim\init.vim" | Should -Not -Exist 
 	}
+	
+	It 'Colorcolumn on 80' {
+		Invoke-NeovimCommand -command 'set cc?' | Should -Match ' *colorcolumn=80'
+	}
 
-	It 'Lines should be set on' {
-		Invoke-NeovimCommand -command 'set nu?' | Should -Match ' *number'
+	It 'Lines should be visable' {
+		Get-NeovimOption -option number -Type bool | Should -BeTrue
+	}
+	
+	It 'Tabstop is 4 spaces' {
+		Get-NeovimOption -option tabstop -Type Int | Should -Be 4
+	}
+
+	It 'Shiftstop is 4 spaces' {
+		Get-NeovimOption -option shiftwidth -Type Int | Should -Be 4
+	}
+
+	It 'Colorcolumns is 80 characters' {
+		Get-NeovimOption -option colorcolumn -Type IntArray | Should -Be 80
+	}
+
+	It 'Selection with mouse is set on' {
+		[bool](Invoke-NeovimCommand -command 'lua =vim.opt.mouse:get().v') | Should -BeTrue
+	}
+
+	It 'Add clipboard to buffers' {
+		Get-NeovimOption -option clipboard -Type StringArray | Should -Be 'unnamed'
 	}
 }
