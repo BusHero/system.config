@@ -1,8 +1,9 @@
-$ParkerNvimPath = "${env:LOCALAPPDATA}\nvim-data\site\pack\packer\start\packer.nvim"
+$ParkerPath = "$($env:XDG_DATA_HOME)\nvim-data\site\pack\packer\start\packer.nvim"
 
-if (Test-Path $ParkerNvimPath) {
+if (Test-Path $ParkerPath) {
 	Write-Host 'packer.nvim is already installed'
-} else {
+}
+else {
 	Write-Host 'Installing packer.nvim'
-	git clone https://github.com/wbthomason/packer.nvim $PargetNvimPath
+	git clone https://github.com/wbthomason/packer.nvim $ParkerPath
 }

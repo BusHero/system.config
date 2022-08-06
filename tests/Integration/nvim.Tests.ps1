@@ -20,20 +20,33 @@ BeforeDiscovery {
 			$option,
 
 			[OptionType]
-			$Type = [string]
+			$Type = [OptionType]::String
 		)
 		switch ($Type) {
-			Int { return Invoke-NeovimCommand "lua =vim.opt.${option}:get()" -as [int] }
-			Bool { return Invoke-NeovimCommand "lua =vim.opt.${option}:get()" -as [bool] }
+			Int { return [int](Invoke-NeovimCommand "lua =vim.opt.${option}:get()") }
+			Bool { 
+				$result = Invoke-NeovimCommand "lua =vim.opt.${option}:get()"
+				return [Convert]::ToBoolean($result)
+			}
 			String { return Invoke-NeovimCommand "lua =vim.opt.${option}:get()" }
 			StringArray { return Invoke-NeovimCommand "lua for _, v in pairs(vim.opt.${option}:get()) do print(v) end" }
 			IntArray { return [int[]](Invoke-NeovimCommand "lua for _, v in pairs(vim.opt.${option}:get()) do print(v) end") }
 			Default { throw 'Unexpected option' }
 		}
 	}
+
+	function script:Test-NeovimLuaModuleInstalled {
+		param(
+			[string]
+			$module
+		)
+
+		$result = Invoke-NeovimCommand -command "lua if pcall(function () require('${module}') end) then print('True') else print('False') end"
+		return [Convert]::ToBoolean($result);
+	}
 }
 	
-Describe 'Environment Variables' {
+Describe 'Check neovim config' {
 	BeforeAll {
 		$script:projectRoot = Get-ProjectRoot -Path $PSScriptRoot -Markers .git
 		$script:config = . "${projectRoot}\nvim\config.ps1"
@@ -69,8 +82,12 @@ Describe 'Environment Variables' {
 		Invoke-NeovimCommand -command 'set cc?' | Should -Match ' *colorcolumn=80'
 	}
 
-	It 'Lines should be visable' {
+	It 'Numbers is on' {
 		Get-NeovimOption -option number -Type bool | Should -BeTrue
+	}
+
+	It 'Relative numbers is on' {
+		Get-NeovimOption -option relativenumber bool | Should -BeTrue
 	}
 	
 	It 'Tabstop is 4 spaces' {
@@ -91,5 +108,18 @@ Describe 'Environment Variables' {
 
 	It 'Add clipboard to buffers' {
 		Get-NeovimOption -option clipboard -Type StringArray | Should -Be 'unnamed'
+	}
+
+	Describe 'Check required folders' -ForEach @(
+		@{Filename = "$($env:XDG_DATA_HOME)\nvim-data\site\pack\packer\start\packer.nvim"; PathType = 'Container' }
+		@{Filename = "$($env:XDG_CONFIG_HOME)\nvim\init.lua"; PathType = 'Leaf' }
+	) {
+		It '<Filename> should exist' {
+			Test-Path -Path $Filename -PathType $PathType | Should -BeTrue
+		}
+	}
+
+	It 'Packer module is installed' {
+		Test-NeovimLuaModuleInstalled -module packer | Should -BeTrue
 	}
 }
