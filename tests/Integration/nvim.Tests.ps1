@@ -113,13 +113,18 @@ Describe 'Check neovim config' {
 	Describe 'Check required folders' -ForEach @(
 		@{Filename = "$($env:XDG_DATA_HOME)\nvim-data\site\pack\packer\start\packer.nvim"; PathType = 'Container' }
 		@{Filename = "$($env:XDG_CONFIG_HOME)\nvim\init.lua"; PathType = 'Leaf' }
+		@{Filename = "$($env:XDG_CONFIG_HOME)\nvim\init.lua"; PathType = 'Leaf' }
+		@{Filename = "$($env:XDG_CONFIG_HOME)\nvim\lua\plugins.lua"; PathType = 'Leaf' }
 	) {
 		It '<Filename> should exist' {
 			Test-Path -Path $Filename -PathType $PathType | Should -BeTrue
 		}
 	}
 
-	It 'Packer module is installed' {
-		Test-NeovimLuaModuleInstalled -module packer | Should -BeTrue
+	It 'Packer module is installed' -TestCases @(
+		@{ Module = 'packer' }
+		@{ Module = 'lspconfig' }
+	) {
+		Test-NeovimLuaModuleInstalled -module $Module | Should -BeTrue -Because "${Module} should be installed"
 	}
 }
