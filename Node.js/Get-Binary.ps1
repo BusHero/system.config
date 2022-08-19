@@ -7,7 +7,7 @@ $Destination = "$($env:ProgramFiles)\nodejs"
 
 try {
 	Write-Host 'Downloading node.js'
-	Invoke-WebRequest -Uri $uri -OutFile $zipFile
+	Invoke-WebRequest -Uri $uri -OutFile $zipFile 
 	
 	Write-Host 'Expanding archive'
 	Expand-Archive -Path $zipFile -DestinationPath $tempFolder

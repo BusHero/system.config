@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<test-results xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="nunit_schema_2.5.xsd" name="Pester" total="2" errors="0" failures="0" not-run="0" inconclusive="0" ignored="0" skipped="0" invalid="0" date="2022-08-20" time="00:03:35">
+  <environment clr-version="4.0.30319.42000" user-domain="User Manager" cwd="C:\" platform="Microsoft Windows Server 2022 Datacenter|C:\Windows|\Device\Harddisk1\Partition2" machine-name="31B719444DC1" nunit-version="2.5.8.0" os-version="10.0.20348" user="ContainerAdministrator" />
+  <culture-info current-culture="en-US" current-uiculture="en-US" />
+  <test-suite type="TestFixture" name="Pester" executed="True" result="Success" success="True" time="3.59" asserts="0" description="Pester">
+    <results>
+      <test-suite type="TestFixture" name="C:\scripts\setup.Tests.ps1" executed="True" result="Success" success="True" time="3.59" asserts="0" description="C:\scripts\setup.Tests.ps1">
+        <results>
+          <test-suite type="TestFixture" name="Node.js should be installed" executed="True" result="Success" success="True" time="1.4825" asserts="0" description="Node.js should be installed">
+            <results>
+              <test-case description="npm is installed" name="Node.js should be installed.npm is installed" time="0.9342" asserts="0" success="True" result="Success" executed="True" />
+              <test-case description="node is installed" name="Node.js should be installed.node is installed" time="0.0114" asserts="0" success="True" result="Success" executed="True" />
+            </results>
+          </test-suite>
+        </results>
+      </test-suite>
+    </results>
+  </test-suite>
+</test-results>
