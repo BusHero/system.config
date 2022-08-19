@@ -3,9 +3,11 @@ docker run `
 	--detach `
 	--interactive `
 	--name node.js `
-	node.js
-docker exec -i node.js pwsh -command "& 'C:\scripts\setup.ps1'"
-docker exec -i node.js pwsh -command "& 'C:\scripts\setup.Tests.ps1'"
+	node.js > $null
+	
+docker exec -i node.js powershell -File 'C:\scripts\setup.ps1'
+docker exec -i node.js powershell -command 'Invoke-Pester scripts'
+
 $foo = $LASTEXITCODE
 docker rm -f node.js > $null
 return $foo
