@@ -1,3 +1,12 @@
+param (
+	[string]
+	$dockerImage,
+	
+	[string]
+	$mode
+)
+
+$script = "C:\scripts\installers\${mode}.ps1"
 $resultsFolder = "$($env:TEMP)\pester"
 
 New-Item `
@@ -12,11 +21,11 @@ docker run `
 	--detach `
 	--interactive `
 	--name node.js `
-	node.js `
+	$dockerImage `
 	> $null
 
-docker exec -i node.js powershell -File 'C:\scripts\setup.ps1'
-docker exec -i node.js powershell -File 'C:\scripts\launchTests.ps1'
+docker exec -i node.js powershell -NoLogo -File $script
+docker exec -i node.js powershell -NoLogo -File 'C:\scripts\launchTests.ps1'
 
 $foo = $LASTEXITCODE
 docker rm -f node.js > $null
