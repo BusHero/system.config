@@ -1,7 +1,13 @@
+param(
+	[string]
+	$dockerfile
+)
+
 $dockerImage = 'test-image'
 $dockerContainer = "test_$(New-Guid)"
 
-docker build -t $dockerImage .
+
+docker build -t $dockerImage -f $dockerfile .
 
 docker run `
 	--detach `
