@@ -128,3 +128,4 @@ Describe 'Check neovim config' {
 		Test-NeovimLuaModuleInstalled -module $Module | Should -BeTrue -Because "${Module} should be installed"
 	}
 }
+Describe "foo" { It "bar" { $true | Should -BeTrue } }

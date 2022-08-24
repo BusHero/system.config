@@ -3,4 +3,4 @@ function Get-ScriptPath {
 		[string]$Path
 	)
 	return 'C:\.config\src\File.ps1'
-}\
+}
