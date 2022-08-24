@@ -1,6 +1,12 @@
 param(
 	[string]
-	$dockerfile
+	$dockerfile,
+
+	[switch]
+	$keepContainer,
+
+	[switch]
+	$LogIntoContainer
 )
 
 $dockerImage = 'test-image'
@@ -25,4 +31,14 @@ docker exec `
 	$dockerContainer `
 	powershell -NoLogo -Command 'Invoke-Pester .\tests\install'
 
-docker rm -f $dockerContainer
+if ($LogIntoContainer) {
+	docker exec `
+		--tty `
+		--interactive `
+		$dockerContainer `
+		powershell -NoLogo
+}
+
+if (!$keepContainer) {
+	docker rm -f $dockerContainer
+}
