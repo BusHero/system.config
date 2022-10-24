@@ -252,8 +252,8 @@ Set-PSReadLineOption -EditMode Windows
 
 # Set up nuke auto completion
 Register-ArgumentCompleter -Native -CommandName nuke -ScriptBlock {
-    param($commandName, $wordToComplete, $cursorPosition)
-    nuke :complete "$wordToComplete" | ForEach-Object {
-        [System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
-    }
+	param($commandName, $wordToComplete, $cursorPosition)
+	nuke :complete "$wordToComplete" | ForEach-Object {
+		[System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
+	}
 }

@@ -83,6 +83,19 @@
 				}
 			],
 			"type": "prompt"
+		},
+		{
+			"alignment": "left",
+			"newline": true,
+			"segments": [
+				{
+					"foreground": "#CD4277",
+					"style": "plain",
+					"template": ">",
+					"type": "text"
+				}
+			],
+			"type": "prompt"
 		}
 	],
 	"final_space": true,
