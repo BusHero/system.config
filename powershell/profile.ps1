@@ -265,3 +265,6 @@ Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
 		[System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
 	}
 }
+
+# PowerShell parameter completion shim for the GitHub CLI
+Invoke-Expression -Command $(gh completion -s powershell | Out-String)
