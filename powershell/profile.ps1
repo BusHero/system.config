@@ -111,7 +111,7 @@ Set-PSReadLineKeyHandler -Key '"', "'" `
 
 	# If cursor is at the start of a token, enclose it in quotes.
 	if ($token.Extent.StartOffset -eq $cursor) {
-		if ($token.Kind -eq [TokenKind]::Generic -or $token.Kind -eq [TokenKind]::Identifier -or 
+		if ($token.Kind -eq [TokenKind]::Generic -or $token.Kind -eq [TokenKind]::Identifier -or
 			$token.Kind -eq [TokenKind]::Variable -or $token.TokenFlags.hasFlag([TokenFlags]::Keyword)) {
 			$end = $token.Extent.EndOffset
 			$len = $end - $cursor
@@ -144,7 +144,7 @@ Set-PSReadLineKeyHandler -Key '(', '{', '[' `
 	$line = $null
 	$cursor = $null
 	[Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$line, [ref]$cursor)
-	
+
 	if ($selectionStart -ne -1) {
 		# Text is selected, wrap it in brackets
 		[Microsoft.PowerShell.PSConsoleReadLine]::Replace($selectionStart, $selectionLength, $key.KeyChar + $line.SubString($selectionStart, $selectionLength) + $closeChar)
@@ -254,6 +254,14 @@ Set-PSReadLineOption -EditMode Windows
 Register-ArgumentCompleter -Native -CommandName nuke -ScriptBlock {
 	param($commandName, $wordToComplete, $cursorPosition)
 	nuke :complete "$wordToComplete" | ForEach-Object {
+		[System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
+	}
+}
+
+# PowerShell parameter completion shim for the dotnet CLI
+Register-ArgumentCompleter -Native -CommandName dotnet -ScriptBlock {
+	param($commandName, $wordToComplete, $cursorPosition)
+	dotnet complete --position $cursorPosition "$wordToComplete" | ForEach-Object {
 		[System.Management.Automation.CompletionResult]::new($_, $_, 'ParameterValue', $_)
 	}
 }
