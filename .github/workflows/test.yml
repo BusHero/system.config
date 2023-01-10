@@ -1,0 +1,12 @@
+name: Test workflow
+on: push
+jobs:
+  test:
+    runs-on: windows-latest
+    name: "Test something"
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Run setup.ps1
+        run: setup.ps1
