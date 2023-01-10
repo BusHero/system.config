@@ -9,4 +9,4 @@ jobs:
         with:
           fetch-depth: 0
       - name: Run setup.ps1
-        run: setup.ps1
+        run: .\setup.ps1
