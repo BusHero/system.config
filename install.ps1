@@ -8,7 +8,7 @@ Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://com
 choco install nodejs -y
 choco install neovim -y
 choco install vscode -y
-choco install powershell-core -y
+choco install powershell-core -y -d -v
 choco install git -y
 choco install Firefox -y
 choco install gh -y
