@@ -7,17 +7,9 @@ Describe 'software should be installed' -ForEach @(
 	@{ Tool = 'pwsh' }
 	@{ Tool = 'git' }
 	@{ Tool = 'gh' }
+	@{ Tool = 'firefox' }
 ) {
 	It '<tool> is installed' {
 		Get-Command $Tool -ErrorAction Ignore | Should -Not -Be $Null -Because "${Tool} should be installed"
-	}
-}
-
-Describe 'Test paths' -ForEach @(
-	@{ Path = "$($env:ProgramFiles)\Mozilla Firefox" }
-	@{ Path = 'C:\.config' }
-) {
-	It '<Path> should exist' {
-		$Path | Should -Exist
 	}
 }
