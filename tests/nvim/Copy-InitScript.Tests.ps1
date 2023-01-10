@@ -16,7 +16,7 @@ Describe 'parent directory' {
 			}
 		}
 		It 'init.lua is copied to the right location' {
-			$Expected = Get-Content -Path $config 
+			$Expected = Get-Content -Path $config
 			$Actual = Get-Content "${path}\nvim\init.lua"
 			$Actual | Should -Be $Expected
 		}
@@ -31,9 +31,9 @@ Describe 'parent directory' {
 				Copy-InitScript
 			}
 		}
-		
+
 		It 'init.lua is copied to the right location' {
-			$Expected = Get-Content -Path $config 
+			$Expected = Get-Content -Path $config
 			$Actual = Get-Content "${path}\nvim\init.lua"
 			$Actual | Should -Be $Expected
 		}
@@ -56,9 +56,9 @@ Describe 'parent directory' {
 		It 'Make .backup a hidden folder' {
 			(Get-Item "${path}\nvim\.backup" -Force).Attributes | Should -Match Hidden
 		}
-		
+
 		It 'init.lua is copied to the right location' {
-			$Expected = Get-Content -Path $config 
+			$Expected = Get-Content -Path $config
 			$Actual = Get-Content "${path}\nvim\init.lua"
 			$Actual | Should -Be $Expected
 		}
@@ -87,7 +87,7 @@ Describe 'parent directory' {
 		}
 
 		It 'init.lua is copied to the right location' {
-			$Expected = Get-Content -Path $config 
+			$Expected = Get-Content -Path $config
 			$Actual = Get-Content "${path}\nvim\init.lua"
 			$Actual | Should -Be $Expected
 		}
@@ -117,7 +117,7 @@ Describe 'parent directory' {
 		}
 
 		It 'init.lua is copied to the right location' {
-			$Expected = Get-Content -Path $config 
+			$Expected = Get-Content -Path $config
 			$Actual = Get-Content "${path}\nvim\init.lua"
 			$Actual | Should -Be $Expected
 		}
@@ -144,7 +144,7 @@ Describe 'parent directory' {
 		}
 
 		It 'init.lua is copied to the right location' {
-			$Expected = Get-Content -Path $config 
+			$Expected = Get-Content -Path $config
 			$Actual = Get-Content "${path}\nvim\init.lua"
 			$Actual | Should -Be $Expected
 		}
@@ -166,7 +166,7 @@ Describe 'parent directory' {
 		It 'original file is copied to the backup folder' {
 			"${path}\nvim\.backup\init.lua" | Should -FileContentMatch $BackupOriginalValue
 		}
-		
+
 		It 'original file is copied to the backup folder' {
 			"${path}\nvim\.backup\init.1.lua" | Should -FileContentMatch $BackupOriginalValue
 		}
@@ -176,7 +176,7 @@ Describe 'parent directory' {
 		}
 
 		It 'init.lua is copied to the right location' {
-			$Expected = Get-Content -Path $config 
+			$Expected = Get-Content -Path $config
 			$Actual = Get-Content "${path}\nvim\init.lua"
 			$Actual | Should -Be $Expected
 		}
@@ -203,7 +203,7 @@ Describe 'parent directory' {
 		}
 
 		It 'init.lua is copied to the right location' {
-			$Expected = Get-Content -Path $config 
+			$Expected = Get-Content -Path $config
 			$Actual = Get-Content "${path}\nvim\init.lua"
 			$Actual | Should -Be $Expected
 		}

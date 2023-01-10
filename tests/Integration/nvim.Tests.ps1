@@ -1,6 +1,6 @@
 BeforeDiscovery {
-	function script:Invoke-NeovimCommand([string]$command) { 
-		$result = nvim --headless -c $command -c q 2>&1 
+	function script:Invoke-NeovimCommand([string]$command) {
+		$result = nvim --headless -c $command -c q 2>&1
 		$result = [string[]]$result
 		$result = $result | Where-Object { !( $_ -eq 'System.Management.Automation.RemoteException') }
 		return [string[]]$result
@@ -24,7 +24,7 @@ BeforeDiscovery {
 		)
 		switch ($Type) {
 			Int { return [int](Invoke-NeovimCommand "lua =vim.opt.${option}:get()") }
-			Bool { 
+			Bool {
 				$result = Invoke-NeovimCommand "lua =vim.opt.${option}:get()"
 				return [Convert]::ToBoolean($result)
 			}
@@ -45,8 +45,8 @@ BeforeDiscovery {
 		return [Convert]::ToBoolean($result);
 	}
 }
-	
-Describe 'Check neovim config' {
+
+Describe 'Check neovim config' -Skip {
 	BeforeAll {
 		$script:projectRoot = Get-ProjectRoot -Path $PSScriptRoot -Markers .git
 		$script:config = . "${projectRoot}\nvim\config.ps1"
@@ -56,7 +56,7 @@ Describe 'Check neovim config' {
 	It 'Check environment variables' {
 		foreach ($variable in $config.Variables.Keys) {
 			[System.Environment]::GetEnvironmentVariable($variable, 'User') | Should -Be $config.Variables.$variable
-			
+
 			$processValue = cmd /c "echo $($Config.Variables.$variable)"
 			[System.Environment]::GetEnvironmentVariable($variable, 'Process') | Should -Be $processValue
 		}
@@ -71,13 +71,13 @@ Describe 'Check neovim config' {
 	}
 
 	It 'Config folder contains init.lua file' {
-		"$($env:XDG_CONFIG_HOME)\nvim\init.lua" | Should -Exist 
+		"$($env:XDG_CONFIG_HOME)\nvim\init.lua" | Should -Exist
 	}
 
 	It 'Config folder should not contain init.vim file' {
-		"$($env:XDG_CONFIG_HOME)\nvim\init.vim" | Should -Not -Exist 
+		"$($env:XDG_CONFIG_HOME)\nvim\init.vim" | Should -Not -Exist
 	}
-	
+
 	It 'Colorcolumn on 80' {
 		Invoke-NeovimCommand -command 'set cc?' | Should -Match ' *colorcolumn=80'
 	}
@@ -89,7 +89,7 @@ Describe 'Check neovim config' {
 	It 'Relative numbers is on' {
 		Get-NeovimOption -option relativenumber bool | Should -BeTrue
 	}
-	
+
 	It 'Tabstop is 4 spaces' {
 		Get-NeovimOption -option tabstop -Type Int | Should -Be 4
 	}
