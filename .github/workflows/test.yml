@@ -7,4 +7,4 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run setup.ps1
-        run: .\scripts\setup.ps1
+        run: .\powershell\setup.ps1
