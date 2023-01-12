@@ -3,6 +3,7 @@ if (!(Get-Command 'pwsh' -ErrorAction Ignore)) {
 	choco install powershell-core -y -d -v
 }
 . "${PSScriptRoot}\powershell\setup.ps1"
+Invoke-Pester "${PSScriptRoot}\tests\powershell"
 
 # Write-Host 'Setup Windows Terminal ... '
 # . "${PSScriptRoot}\WindowsTerminal\setup.ps1"
