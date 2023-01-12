@@ -1,4 +1,3 @@
-winget install -e --id Microsoft.PowerShell -v 7.3.0.0
 
 function Set-Profile {
 	param (
