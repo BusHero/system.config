@@ -7,4 +7,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run setup.ps1
-        run: .\setup.ps1
+        run: .\powershell\setup.ps1
+      - name: Run tests.ps1
+        run: .\powershell\test.ps1
