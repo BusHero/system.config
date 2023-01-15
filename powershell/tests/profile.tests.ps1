@@ -46,4 +46,25 @@ Describe 'powershell' {
 			-Path "$($env:USERPROFILE)\.config" `
 			-PathType Container | Should -BeTrue -Because '~\.config folder should exist'
 	}
+
+	Context 'oh my posh' {
+		It 'oh my posh file exists' {
+			"$($Env:USERPROFILE)\.config\ohmyposh\settings.json" | Should -Exist
+		}
+
+		It 'right settings' {
+			$first = Get-Content `
+				-Path "$($env:USERPROFILE)\.config\ohmyposh\settings.json" `
+				-ErrorAction Ignore
+			$second = Get-Content `
+				-Path "${PSScriptRoot}\..\ohmyposh\settings.json" `
+				-ErrorAction Ignore
+			Compare-Object `
+				-ReferenceObject $first `
+				-DifferenceObject $second `
+				-CaseSensitive `
+				-OutVariable result
+			$result | Should -BeNullOrEmpty -Because 'files should be the same'
+		}
+	}
 }

@@ -19,9 +19,11 @@ $SetExecutionPolicy = {
 		-ExecutionPolicy Bypass `
 		-Scope Process `
 		-Force
-	Install-Module `
-		-Name Terminal-Icons `
-		-Scope CurrentUser
+	if (!(Get-InstalledModule -Name 'Terminal-Icons' -ErrorAction Ignore)) {
+		Install-Module `
+			-Name Terminal-Icons `
+			-Scope CurrentUser
+	}
 }
 
 pwsh `
@@ -74,3 +76,9 @@ New-Item `
 	-Path "$($env:USERPROFILE)\.config" `
 	-ItemType Directory `
 	-Force > $null
+
+Copy-Item `
+	-Recurse `
+	-Path "${PSScriptRoot}\ohmyposh" `
+	-Destination "$($env:USERPROFILE)\.config" `
+	-Force
