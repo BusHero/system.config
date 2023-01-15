@@ -10,3 +10,4 @@ jobs:
         run: .\powershell\setup.ps1
       - name: Run tests.ps1
         run: .\powershell\test.ps1
+        shell: pwsh -NoProfile -Command ". '{0}'"
