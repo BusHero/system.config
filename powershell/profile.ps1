@@ -11,7 +11,7 @@ Import-Module -Name Terminal-Icons
 & "$($env:LOCALAPPDATA)\Programs\oh-my-posh\bin\oh-my-posh.exe" `
 	--init `
 	--shell pwsh `
-	--config 'C:\.config\powershell\ohmyposh\settings.json' | Invoke-Expression
+	--config "$($env:USERPROFILE)\.config\ohmyposh\settings.json" | Invoke-Expression
 
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 	param($wordToComplete, $commandAst, $cursorPosition)
