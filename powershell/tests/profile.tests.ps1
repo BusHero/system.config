@@ -8,7 +8,9 @@ Describe 'powershell' {
 		'pwsh'
 	) {
 		BeforeAll {
-			$profilePath = & $_ -NoProfile -C '$PROFILE.CurrentUserAllHosts'
+			$profilePath = & $_ `
+				-NoProfile `
+				-Command '$PROFILE.CurrentUserAllHosts'
 		}
 
 		It 'Profile Path exists' {
