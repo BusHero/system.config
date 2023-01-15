@@ -11,12 +11,29 @@ function Copy-Profile ([string] $path, [string]$destination) {
 		-Destination $destination
 }
 
-Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
-Set-ExecutionPolicy `
-	-ExecutionPolicy Bypass `
-	-Scope Process `
-	-Force
-Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
+$SetExecutionPolicy = {
+	Set-PSRepository `
+		-Name 'PSGallery' `
+		-InstallationPolicy Trusted
+	Set-ExecutionPolicy `
+		-ExecutionPolicy Bypass `
+		-Scope Process `
+		-Force
+	Install-Module `
+		-Name Terminal-Icons `
+		-Scope CurrentUser
+}
+
+pwsh `
+	-NoProfile `
+	-Command "$SetExecutionPolicy"
+powershell `
+	-NoProfile `
+	-Command "$SetExecutionPolicy"
+
+if (! (Get-Command 'oh-my-posh')) {
+	Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
+}
 
 $profilePath = "${PSScriptRoot}\profile.ps1"
 $powershellProfilePath = powershell `
