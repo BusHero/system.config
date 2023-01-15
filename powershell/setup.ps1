@@ -11,6 +11,8 @@ function Copy-Profile ([string] $path, [string]$destination) {
 		-Destination $destination
 }
 
+Set-PSRepository -Name 'PSGallery' -InstallationPolicy Trusted
+
 $profilePath = "${PSScriptRoot}\profile.ps1"
 $powershellProfilePath = powershell `
 	-NoProfile `
