@@ -8,7 +8,7 @@ if ($host.Name -eq 'ConsoleHost') {
 }
 Import-Module -Name Terminal-Icons
 
-& "$($env:LOCALAPPDATA)\Programs\oh-my-posh\bin\oh-my-posh.exe" `
+oh-my-posh `
 	--init `
 	--shell pwsh `
 	--config "$($env:USERPROFILE)\.config\ohmyposh\settings.json" | Invoke-Expression
