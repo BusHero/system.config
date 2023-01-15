@@ -18,7 +18,6 @@ Set-ExecutionPolicy `
 	-Force
 Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
 
-
 $profilePath = "${PSScriptRoot}\profile.ps1"
 $powershellProfilePath = powershell `
 	-NoProfile `

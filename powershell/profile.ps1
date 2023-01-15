@@ -8,7 +8,10 @@ if ($host.Name -eq 'ConsoleHost') {
 }
 Import-Module -Name Terminal-Icons
 
-oh-my-posh --init --shell pwsh --config 'C:\.config\powershell\ohmyposh\settings.json' | Invoke-Expression
+& "$($env:LOCALAPPDATA)\Programs\oh-my-posh\bin\oh-my-posh.exe" `
+	--init `
+	--shell pwsh `
+	--config 'C:\.config\powershell\ohmyposh\settings.json' | Invoke-Expression
 
 Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 	param($wordToComplete, $commandAst, $cursorPosition)
