@@ -26,3 +26,10 @@ Copy-Profile `
 Copy-Profile `
 	-Path $profilePath `
 	-Destination $powershellCoreProfilePath
+
+pwsh `
+	-NoProfile `
+	-Command 'Install-Module -Name Terminal-Icons -Scope CurrentUser'
+powershell `
+	-NoProfile `
+	-Command 'Install-Module -Name Terminal-Icons -Scope CurrentUser'

@@ -243,10 +243,10 @@ Set-PSReadLineKeyHandler -Key RightArrow `
 		[Microsoft.PowerShell.PSConsoleReadLine]::AcceptNextSuggestionWord($key, $arg)
 	}
 }
-switch (Get-Module PSReadLine | Select-Object -ExpandProperty Version) {
-	{ $_ -gt '2.2' } { Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView -WarningAction Ignore -ErrorAction Ignore; break }
-	{ $_ -gt '2.1' } { Set-PSReadLineOption -PredictionSource History -WarningAction Ignore; break }
-}
+# switch (Get-Module PSReadLine | Select-Object -ExpandProperty Version) {
+# 	{ $_ -gt '2.2' } { Set-PSReadLineOption -PredictionSource History -PredictionViewStyle ListView -WarningAction Ignore -ErrorAction Ignore; break }
+# 	{ $_ -gt '2.1' } { Set-PSReadLineOption -PredictionSource History -WarningAction Ignore; break }
+# }
 Set-PSReadLineOption -EditMode Windows
 
 
