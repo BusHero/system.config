@@ -31,7 +31,7 @@ powershell `
 	-NoProfile `
 	-Command "$SetExecutionPolicy"
 
-if (! (Get-Command 'oh-my-posh')) {
+if (! (Get-Command 'oh-my-posh' -ErrorAction Ignore)) {
 	Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
 }
 
