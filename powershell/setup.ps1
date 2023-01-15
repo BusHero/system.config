@@ -68,3 +68,9 @@ pwsh `
 powershell `
 	-NoProfile `
 	-Command 'Install-Module -Name Terminal-Icons -Scope CurrentUser'
+
+
+New-Item `
+	-Path "$($env:USERPROFILE)\.config" `
+	-ItemType Directory `
+	-Force > $null
