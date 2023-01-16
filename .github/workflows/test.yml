@@ -9,6 +9,9 @@ jobs:
       - name: Run setup.ps1
         run: |
           .\powershell\setup.ps1
+          Test-Path "$(${env:ProgramFiles(x86)})\oh-my-posh"
+          Test-Path "$(${env:LOCALAPPDATA})\Programs\oh-my-posh"
+          exit 1
           if (Test-Path "$(${env:ProgramFiles(x86)})\oh-my-posh") {
             echo "%ProgramFiles(x86)%\oh-my-posh\bin" | Out-File `
               -FilePath $env:GITHUB_PATH `
