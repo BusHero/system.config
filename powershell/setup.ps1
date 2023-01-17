@@ -73,7 +73,6 @@ powershell `
 	-NoProfile `
 	-Command 'Install-Module -Name Terminal-Icons -Scope CurrentUser'
 
-
 New-Item `
 	-Path "$($env:USERPROFILE)\.config" `
 	-ItemType Directory `
@@ -84,19 +83,6 @@ Copy-Item `
 	-Path "${PSScriptRoot}\ohmyposh" `
 	-Destination "$($env:USERPROFILE)\.config" `
 	-Force
-
-# $command = {
-# 	$profilePath = Split-Path `
-# 		-Path $PROFILE.CurrentUserAllHosts `
-# 		-Parent
-# 	New-Item `
-# 		-Path "${profilePath}\ProfileScripts" `
-# 		-ItemType Directory `
-# 		-Force > $null
-# }
-
-# pwsh -NoProfile -Command "${command}"
-# powershell -NoProfile -Command "${command}"
 
 Copy-Item `
 	-Path "${PSScriptRoot}\ProfileScripts" `
@@ -109,20 +95,3 @@ Copy-Item `
 	-Destination (Get-ProfileFolder -shell 'powershell') `
 	-Recurse `
 	-ErrorAction Ignore
-
-# $profilePath = Split-Path `
-# 	-Path $Profile.CurrentUserAllHosts `
-# 	-Parent
-# pwsh -NoProfile -Command "$Profile.CurrentUserAllHosts"
-# New-Item `
-# 	-Path "${profilePath}\ProfileScripts" `
-# 	-ItemType Directory `
-# 	-Force > $null
-
-# $profilePath = Split-Path `
-# 	-Path $Profile.CurrentUserAllHosts `
-# 	-Parent
-# New-Item `
-# 	-Path "${profilePath}\ProfileScripts" `
-# 	-ItemType Directory `
-# 	-Force > $null
