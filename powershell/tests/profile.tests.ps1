@@ -49,11 +49,11 @@ Describe 'powershell' {
 }
 
 Describe 'scripts folder' -ForEach @(
-	'pwsh'
-	'powershell'
+	@{ Shell = 'pwsh' }
+	@{ Shell = 'powershell' }
 ) {
 	BeforeAll {
-		$profilePath = & $_ `
+		$profilePath = & $Shell `
 			-NoProfile `
 			-Command '$PROFILE.CurrentUserAllHosts'
 		$profilePath = Split-Path `
