@@ -26,6 +26,7 @@ $SetExecutionPolicy = {
 	}
 }
 
+
 pwsh `
 	-NoProfile `
 	-Command "$SetExecutionPolicy"
@@ -79,3 +80,32 @@ Copy-Item `
 	-Path "${PSScriptRoot}\ohmyposh" `
 	-Destination "$($env:USERPROFILE)\.config" `
 	-Force
+
+$command = {
+	$profilePath = Split-Path `
+		-Path $PROFILE.CurrentUserAllHosts `
+		-Parent
+	New-Item `
+		-Path "${profilePath}\ProfileScripts" `
+		-ItemType Directory `
+		-Force > $null
+}
+
+pwsh -NoProfile -Command "${command}"
+powershell -NoProfile -Command "${command}"
+# $profilePath = Split-Path `
+# 	-Path $Profile.CurrentUserAllHosts `
+# 	-Parent
+# pwsh -NoProfile -Command "$Profile.CurrentUserAllHosts"
+# New-Item `
+# 	-Path "${profilePath}\ProfileScripts" `
+# 	-ItemType Directory `
+# 	-Force > $null
+
+# $profilePath = Split-Path `
+# 	-Path $Profile.CurrentUserAllHosts `
+# 	-Parent
+# New-Item `
+# 	-Path "${profilePath}\ProfileScripts" `
+# 	-ItemType Directory `
+# 	-Force > $null

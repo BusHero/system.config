@@ -47,3 +47,20 @@ Describe 'powershell' {
 			-PathType Container | Should -BeTrue -Because '~\.config folder should exist'
 	}
 }
+
+Describe 'scripts folder' -ForEach @(
+	'pwsh'
+	'powershell'
+) {
+	BeforeAll {
+		$profilePath = & $_ `
+			-NoProfile `
+			-Command '$PROFILE.CurrentUserAllHosts'
+		$profilePath = Split-Path `
+			-Path $profilePath `
+			-Parent
+	}
+	It '<_> scripts folder exists' {
+		"${profilePath}\ProfileScripts\" | Should -Exist
+	}
+}

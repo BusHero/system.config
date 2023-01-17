@@ -8,4 +8,4 @@ if (Test-Path -Path $ModuleName) {
 	if (Join-Path -Path $ModulePath -ChildPath '.git' | Test-Path) {
 		git pull
 	}
-} 
+}
