@@ -11,6 +11,10 @@ function Copy-Profile ([string] $path, [string]$destination) {
 		-Destination $destination
 }
 
+function Get-ProfileFolder([string] $shell) {
+	& $shell -NoProfile -Command 'Split-Path -Path $Profile.CurrentUserAllHosts -Parent'
+}
+
 $SetExecutionPolicy = {
 	Set-PSRepository `
 		-Name 'PSGallery' `
@@ -81,18 +85,31 @@ Copy-Item `
 	-Destination "$($env:USERPROFILE)\.config" `
 	-Force
 
-$command = {
-	$profilePath = Split-Path `
-		-Path $PROFILE.CurrentUserAllHosts `
-		-Parent
-	New-Item `
-		-Path "${profilePath}\ProfileScripts" `
-		-ItemType Directory `
-		-Force > $null
-}
+# $command = {
+# 	$profilePath = Split-Path `
+# 		-Path $PROFILE.CurrentUserAllHosts `
+# 		-Parent
+# 	New-Item `
+# 		-Path "${profilePath}\ProfileScripts" `
+# 		-ItemType Directory `
+# 		-Force > $null
+# }
 
-pwsh -NoProfile -Command "${command}"
-powershell -NoProfile -Command "${command}"
+# pwsh -NoProfile -Command "${command}"
+# powershell -NoProfile -Command "${command}"
+
+Copy-Item `
+	-Path "${PSScriptRoot}\ProfileScripts" `
+	-Destination (Get-ProfileFolder -shell 'pwsh') `
+	-Recurse `
+	-ErrorAction Ignore
+
+Copy-Item `
+	-Path "${PSScriptRoot}\ProfileScripts" `
+	-Destination (Get-ProfileFolder -shell 'powershell') `
+	-Recurse `
+	-ErrorAction Ignore
+
 # $profilePath = Split-Path `
 # 	-Path $Profile.CurrentUserAllHosts `
 # 	-Parent

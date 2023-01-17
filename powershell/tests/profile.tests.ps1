@@ -48,6 +48,12 @@ Describe 'powershell' {
 	}
 }
 
+BeforeDiscovery {
+	$files = Get-ChildItem `
+		-Path "${PSScriptRoot}\..\ProfileScripts" `
+		-Filter '*.ps1'
+}
+
 Describe 'scripts folder' -ForEach @(
 	@{ Shell = 'pwsh' }
 	@{ Shell = 'powershell' }
@@ -62,5 +68,33 @@ Describe 'scripts folder' -ForEach @(
 	}
 	It '<_> scripts folder exists' {
 		"${profilePath}\ProfileScripts\" | Should -Exist
+	}
+
+	Describe '<_> exists' -ForEach $files {
+		BeforeAll {
+			$scriptName = Split-Path `
+				-Path $_ `
+				-Leaf
+			$scriptPath = "${profilePath}\ProfileScripts\${scriptName}"
+		}
+
+		It '<_>' {
+			$scriptPath | Should -Exist
+		}
+
+		It 'Content should match' {
+			$first = Get-Content `
+				-Path $scriptPath `
+				-ErrorAction Ignore
+			$second = Get-Content `
+				-Path $_ `
+				-ErrorAction Ignore
+			Compare-Object `
+				-ReferenceObject $first `
+				-DifferenceObject $second `
+				-CaseSensitive `
+				-OutVariable result
+			$result | Should -BeNullOrEmpty -Because 'files should be the same'
+		}
 	}
 }
