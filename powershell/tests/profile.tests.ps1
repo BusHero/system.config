@@ -33,7 +33,9 @@ Describe 'powershell' {
 		}
 
 		It 'Run profile' {
-			$result = & "$_" -NoProfile -Command ". ${profilePath}; if (`$error) { exit 1 }"
+			$result = & "$_" `
+				-NoProfile `
+				-Command ". ${profilePath}; if (`$error) { exit 1 }"
 			if ($result) {
 				Write-Host "${result}"
 			}
@@ -82,7 +84,7 @@ Describe 'scripts folder' -ForEach @(
 			$scriptPath | Should -Exist
 		}
 
-		It 'Content should match' {
+		It 'MatchContent' {
 			$first = Get-Content `
 				-Path $scriptPath `
 				-ErrorAction Ignore
@@ -95,6 +97,16 @@ Describe 'scripts folder' -ForEach @(
 				-CaseSensitive `
 				-OutVariable result
 			$result | Should -BeNullOrEmpty -Because 'files should be the same'
+		}
+
+		It 'IsValid' {
+			$result = & $Shell `
+				-NoProfile `
+				-Command ". ${_}; if (`$error) { exit 1 }"
+			if ($result) {
+				Write-Host "${result}"
+			}
+			$LASTEXITCODE | Should -Be 0 -Because 'profile should have no warnings or errors'
 		}
 	}
 }
