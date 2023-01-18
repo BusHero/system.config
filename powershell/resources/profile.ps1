@@ -1,8 +1,9 @@
-. "${PSScriptRoot}\ProfileScripts\aliases.ps1"
-. "${PSScriptRoot}\ProfileScripts\keymappings.ps1"
-. "${PSScriptRoot}\ProfileScripts\autocompletion.ps1"
-. "${PSScriptRoot}\ProfileScripts\oh-my-posh.ps1"
-. "${PSScriptRoot}\ProfileScripts\psreadline.ps1"
-. "${PSScriptRoot}\ProfileScripts\functions.ps1"
+$scriptFiles = Get-ChildItem `
+	-Path "${PSScriptRoot}\ProfileScripts" `
+	-Filter '*.ps1'
+
+foreach	($script in $scriptFiles) {
+	. $script.FullName
+}
 
 Import-Module -Name Terminal-Icons
