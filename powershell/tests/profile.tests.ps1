@@ -78,7 +78,7 @@ Describe 'scripts folder' -ForEach @(
 			$scriptPath = "${profilePath}\ProfileScripts\${scriptName}"
 		}
 
-		It '<_>' {
+		It 'Exists' {
 			$scriptPath | Should -Exist
 		}
 
