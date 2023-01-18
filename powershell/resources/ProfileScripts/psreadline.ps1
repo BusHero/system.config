@@ -22,3 +22,28 @@ public static extern bool GetConsoleMode(IntPtr hConsoleHandle, out uint lpMode)
 function CanUsePredictionSource {
 	return (! [System.Console]::IsOutputRedirected) -and (IsVirtualTerminalProcessingEnabled)
 }
+
+
+if ($host.Name -eq 'ConsoleHost') {
+	Import-Module PSReadLine
+}
+if (CanUsePredictionSource) {
+	switch (Get-Module PSReadLine | Select-Object -ExpandProperty Version) {
+		{ $_ -gt '2.2' } {
+			Set-PSReadLineOption `
+				-PredictionSource History `
+				-PredictionViewStyle ListView `
+				-WarningAction Ignore `
+				-ErrorAction Ignore
+			break
+		}
+		{ $_ -gt '2.1' } {
+			Set-PSReadLineOption `
+				-PredictionSource History `
+				-ErrorAction Ignore `
+				-WarningAction Ignore
+			break
+		}
+	}
+	Set-PSReadLineOption -EditMode Windows
+}
