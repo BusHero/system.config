@@ -79,7 +79,7 @@ New-Item `
 
 Copy-Item `
 	-Recurse `
-	-Path "${PSScriptRoot}\ohmyposh" `
+	-Path "${PSScriptRoot}\resources\ohmyposh" `
 	-Destination "$($env:USERPROFILE)\.config" `
 	-Force
 

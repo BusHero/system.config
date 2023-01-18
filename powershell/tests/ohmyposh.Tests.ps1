@@ -4,7 +4,7 @@ Describe 'ohmyposh' {
 			-Name 'oh-my-posh' `
 			-ErrorAction Ignore | Should -Not -BeNullOrEmpty -Because "'oh-my-posh' should be setup in path"
 	}
-	
+
 	It 'oh my posh file exists' {
 		"$($Env:USERPROFILE)\.config\ohmyposh\settings.json" | Should -Exist
 	}
@@ -14,7 +14,7 @@ Describe 'ohmyposh' {
 			-Path "$($env:USERPROFILE)\.config\ohmyposh\settings.json" `
 			-ErrorAction Ignore
 		$second = Get-Content `
-			-Path "${PSScriptRoot}\..\ohmyposh\settings.json" `
+			-Path "${PSScriptRoot}\..\resources\ohmyposh\settings.json" `
 			-ErrorAction Ignore
 		Compare-Object `
 			-ReferenceObject $first `
