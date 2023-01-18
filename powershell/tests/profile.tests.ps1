@@ -50,7 +50,7 @@ Describe 'powershell' {
 
 BeforeDiscovery {
 	$files = Get-ChildItem `
-		-Path "${PSScriptRoot}\..\ProfileScripts" `
+		-Path "${PSScriptRoot}\..\resources\ProfileScripts" `
 		-Filter '*.ps1'
 }
 

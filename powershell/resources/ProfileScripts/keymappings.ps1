@@ -28,6 +28,7 @@ Set-PSReadLineKeyHandler -Key '"', "'" `
 	$parseErrors = $null
 	[Microsoft.PowerShell.PSConsoleReadLine]::GetBufferState([ref]$ast, [ref]$tokens, [ref]$parseErrors, [ref]$null)
 
+
 	function FindToken {
 		param($tokens, $cursor)
 

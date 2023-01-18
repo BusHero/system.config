@@ -84,13 +84,13 @@ Copy-Item `
 	-Force
 
 Copy-Item `
-	-Path "${PSScriptRoot}\ProfileScripts" `
+	-Path "${PSScriptRoot}\resources\ProfileScripts" `
 	-Destination (Get-ProfileFolder -shell 'pwsh') `
 	-Recurse `
 	-ErrorAction Ignore
 
 Copy-Item `
-	-Path "${PSScriptRoot}\ProfileScripts" `
+	-Path "${PSScriptRoot}\resources\ProfileScripts" `
 	-Destination (Get-ProfileFolder -shell 'powershell') `
 	-Recurse `
 	-ErrorAction Ignore
