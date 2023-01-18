@@ -30,7 +30,6 @@ $SetExecutionPolicy = {
 	}
 }
 
-
 pwsh `
 	-NoProfile `
 	-Command "$SetExecutionPolicy"
@@ -50,7 +49,7 @@ if (! (Get-Command -Name 'oh-my-posh' -ErrorAction Ignore)) {
 	}
 }
 
-$profilePath = "${PSScriptRoot}\profile.ps1"
+$profilePath = "${PSScriptRoot}\resources\profile.ps1"
 $powershellProfilePath = powershell `
 	-NoProfile `
 	-Command '$PROFILE.CurrentUserAllHosts'

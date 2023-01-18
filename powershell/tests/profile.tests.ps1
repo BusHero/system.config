@@ -22,7 +22,7 @@ Describe 'powershell' {
 				-Path $profilePath `
 				-ErrorAction Ignore
 			$second = Get-Content `
-				-Path "${PSScriptRoot}\..\profile.ps1" `
+				-Path "${PSScriptRoot}\..\resources\profile.ps1" `
 				-ErrorAction Ignore
 			Compare-Object `
 				-ReferenceObject $first `
