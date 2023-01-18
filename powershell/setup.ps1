@@ -95,3 +95,17 @@ Copy-Item `
 	-Destination (Get-ProfileFolder -shell 'powershell') `
 	-Recurse `
 	-ErrorAction Ignore
+
+$installCode = {
+	Install-Module `
+		-Name posh-git `
+		-Scope CurrentUser `
+		-Force
+}
+
+pwsh `
+	-NoProfile `
+	-Command "${installCode}"
+powershell `
+	-NoProfile `
+	-Command "${installCode}"
