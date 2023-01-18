@@ -2,8 +2,8 @@ using namespace System.Management.Automation
 using namespace System.Management.Automation.Language
 
 . "${PSScriptRoot}\ProfileScripts\functions.ps1"
+. "${PSScriptRoot}\ProfileScripts\aliases.ps1"
 
-New-Alias -Name touch -Value New-Item
 
 if ($host.Name -eq 'ConsoleHost') {
 	Import-Module PSReadLine
