@@ -28,7 +28,5 @@ Register-ArgumentCompleter -Native -CommandName winget -ScriptBlock {
 # PowerShell parameter completion shim for the GitHub CLI
 gh completion -s powershell | Out-String | Invoke-Expression
 
-# PowerShell parameter completion shim for oh-my-posh
-oh-my-posh completion powershell | Out-String | Invoke-Expression
 
 Import-Module -Name posh-git

@@ -5,4 +5,6 @@ if (Get-Command `
 		--init `
 		--shell pwsh `
 		--config "$($env:USERPROFILE)\.config\ohmyposh\settings.json" | Invoke-Expression
+
+	oh-my-posh completion powershell | Out-String | Invoke-Expression
 }
