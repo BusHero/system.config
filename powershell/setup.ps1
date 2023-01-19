@@ -11,6 +11,8 @@ function Copy-Profile ([string] $path, [string]$destination) {
 		-Destination $destination
 }
 
+& "${PSScriptRoot}\install.ps1"
+
 function Get-ProfileFolder([string] $shell) {
 	& $shell -NoProfile -Command 'Split-Path -Path $Profile.CurrentUserAllHosts -Parent'
 }

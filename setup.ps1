@@ -1,7 +1,5 @@
 Write-Host 'Setup Powershell ... '
-if (!(Get-Command 'pwsh' -ErrorAction Ignore)) {
-	choco install powershell-core -y -d -v
-}
+
 . "${PSScriptRoot}\powershell\setup.ps1"
 . "${PSScriptRoot}\powershell\test.ps1"
 
