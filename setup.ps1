@@ -1,7 +1,7 @@
 Write-Host 'Setup Powershell ... '
 
-. "${PSScriptRoot}\powershell\setup.ps1"
-. "${PSScriptRoot}\powershell\test.ps1"
+& "${PSScriptRoot}\powershell\setup.ps1"
+& "${PSScriptRoot}\powershell\test.ps1"
 
 # Write-Host 'Setup Windows Terminal ... '
 # . "${PSScriptRoot}\WindowsTerminal\setup.ps1"
