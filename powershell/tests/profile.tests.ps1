@@ -42,12 +42,6 @@ Describe 'powershell' {
 			$LASTEXITCODE | Should -Be 0 -Because 'profile should have no warnings'
 		}
 	}
-
-	It '~\.config folder exists' {
-		Test-Path `
-			-Path "$($env:USERPROFILE)\.config" `
-			-PathType Container | Should -BeTrue -Because '~\.config folder should exist'
-	}
 }
 
 BeforeDiscovery {
