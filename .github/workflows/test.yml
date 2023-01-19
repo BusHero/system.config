@@ -22,5 +22,7 @@ jobs:
               -Append
           }
       - name: Run tests.ps1
-        run: .\powershell\test.ps1
+        run: |
+          . $PROFILE.CurrentUserAllHosts
+          .\powershell\test.ps1
         shell: pwsh -NoProfile -Command ". '{0}'"
