@@ -12,6 +12,8 @@ function Copy-Profile ([string] $path, [string]$destination) {
 }
 
 & "${PSScriptRoot}\install.ps1"
+pwsh -NoProfile -File "${PSScriptRoot}\modules.ps1"
+powershell -NoProfile -File "${PSScriptRoot}\modules.ps1"
 
 function Get-ProfileFolder([string] $shell) {
 	& $shell -NoProfile -Command 'Split-Path -Path $Profile.CurrentUserAllHosts -Parent'
@@ -57,13 +59,6 @@ Copy-Profile `
 	-Path $profilePath `
 	-Destination $powershellCoreProfilePath
 
-pwsh `
-	-NoProfile `
-	-Command 'Install-Module -Name Terminal-Icons -Scope CurrentUser'
-powershell `
-	-NoProfile `
-	-Command 'Install-Module -Name Terminal-Icons -Scope CurrentUser'
-
 Copy-Item `
 	-Path "${PSScriptRoot}\resources\ProfileScripts" `
 	-Destination (Get-ProfileFolder -shell 'pwsh') `
@@ -75,19 +70,5 @@ Copy-Item `
 	-Destination (Get-ProfileFolder -shell 'powershell') `
 	-Recurse `
 	-ErrorAction Ignore
-
-$installCode = {
-	Install-Module `
-		-Name posh-git `
-		-Scope CurrentUser `
-		-Force
-}
-
-pwsh `
-	-NoProfile `
-	-Command "${installCode}"
-powershell `
-	-NoProfile `
-	-Command "${installCode}"
 
 . $PROFILE.CurrentUserAllHosts
