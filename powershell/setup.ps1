@@ -37,17 +37,7 @@ powershell `
 	-NoProfile `
 	-Command "$SetExecutionPolicy"
 
-# if (! (Get-Command -Name 'oh-my-posh' -ErrorAction Ignore)) {
-# 	if (Get-Command -Name 'winget' -ErrorAction Ignore) {
-# 		winget install JanDeDobbeleer.OhMyPosh -s winget
-# 	}
-# 	elseif (Get-Command -Name 'scoop' -ErrorAction Ignore) {
-# 		scoop install 'https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/oh-my-posh.json'
-# 	}
-# 	else {
-# 		Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
-# 	}
-# }
+
 
 $profilePath = "${PSScriptRoot}\resources\profile.ps1"
 $powershellProfilePath = powershell `
@@ -71,17 +61,6 @@ pwsh `
 powershell `
 	-NoProfile `
 	-Command 'Install-Module -Name Terminal-Icons -Scope CurrentUser'
-
-New-Item `
-	-Path "$($env:USERPROFILE)\.config" `
-	-ItemType Directory `
-	-Force > $null
-
-Copy-Item `
-	-Recurse `
-	-Path "${PSScriptRoot}\resources\ohmyposh" `
-	-Destination "$($env:USERPROFILE)\.config" `
-	-Force
 
 Copy-Item `
 	-Path "${PSScriptRoot}\resources\ProfileScripts" `
