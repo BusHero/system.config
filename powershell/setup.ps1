@@ -108,3 +108,5 @@ pwsh `
 powershell `
 	-NoProfile `
 	-Command "${installCode}"
+
+. $PROFILE.CurrentUserAllHosts
