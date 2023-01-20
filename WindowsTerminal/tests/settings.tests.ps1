@@ -8,18 +8,9 @@ Describe 'WindowsTerminal.settings.json' {
 	}
 
 	It 'right settings' {
-		$first = Get-Content `
-			-Path $path `
-			-ErrorAction Ignore
-		$second = Get-Content `
-			-Path "${PSScriptRoot}\..\resources\settings.json" `
-			-ErrorAction Ignore
-		Compare-Object `
-			-ReferenceObject $first `
-			-DifferenceObject $second `
-			-CaseSensitive `
-			-OutVariable result
-		$result | Should -BeNullOrEmpty -Because 'files should be the same'
+		$hash1 = Get-FileHash -Path $path
+		$hash2 = Get-FileHash "${PSScriptRoot}\..\resources\settings.json"
+		$hash1.Hash | Should -Be $hash2.Hash -Because 'files should be the same '
 	}
 
 	It 'Valid Schema' -Skip {
