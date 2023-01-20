@@ -15,6 +15,5 @@ jobs:
             -FilePath $env:GITHUB_PATH `
             -Encoding utf8 `
             -Append
-          Test-Path "$($env:LocalAppData)\Programs\oh-my-posh"
       - name: Run test.ps1
         run: .\test.ps1
