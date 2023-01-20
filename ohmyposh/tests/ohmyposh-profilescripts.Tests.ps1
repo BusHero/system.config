@@ -1,7 +1,3 @@
-BeforeAll {
-	. "${PSScriptRoot}\..\resources\oh-my-posh.ps1"
-}
-
 Describe 'miscellenious' {
 	Context 'autocompletion' {
 		BeforeAll {
@@ -36,18 +32,9 @@ Describe 'oh-my-posh.ps1' -ForEach @(
 		$scriptPath | Should -Exist
 	}
 	It 'MatchContent' {
-		$first = Get-Content `
-			-Path $scriptPath `
-			-ErrorAction Ignore
-		$second = Get-Content `
-			-Path "${PSScriptRoot}\..\resources\oh-my-posh.ps1" `
-			-ErrorAction Ignore
-		Compare-Object `
-			-ReferenceObject $first `
-			-DifferenceObject $second `
-			-CaseSensitive `
-			-OutVariable result
-		$result | Should -BeNullOrEmpty -Because 'files should be the same'
+		$first = Get-FileHash -Path $scriptPath
+		$second = Get-FileHash -Path "${PSScriptRoot}\..\resources\oh-my-posh.ps1"
+		$first.Hash | Should -Be $second.Hash -Because 'files should be the same'
 	}
 	It 'IsValid' {
 		$result = & $Shell `
