@@ -1,13 +1,11 @@
 Write-Host 'Setup Powershell ... '
-
 & "${PSScriptRoot}\powershell\setup.ps1"
-& $PROFILE.CurrentUserAllHosts
 
 Write-Host 'Setup oh-my-posh ... '
-
 & "${PSScriptRoot}\ohmyposh\setup.ps1"
-# Write-Host 'Setup Windows Terminal ... '
-# . "${PSScriptRoot}\WindowsTerminal\setup.ps1"
+
+Write-Host 'Setup Windows Terminal ... '
+& "${PSScriptRoot}\WindowsTerminal\setup.ps1"
 
 # Write-Host 'Setup Neo vim ... '
 # . "${PSSCriptRoot}\nvim\setup.ps1"
