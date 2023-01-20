@@ -10,4 +10,14 @@ elseif (Get-Command -Name 'scoop' -ErrorAction Ignore) {
 }
 else {
 	Invoke-Expression ((New-Object System.Net.WebClient).DownloadString('https://ohmyposh.dev/install.ps1'))
+	[System.Environment]::SetEnvironmentVariable('Path', $env:Path, 'user')
+
+	$path = [System.Environment]::GetEnvironmentVariable('Path', 'user')
+	if (Test-Path "$(${env:ProgramFiles(x86)})\oh-my-posh") {
+		$path += ";$(${env:ProgramFiles(x86)})\oh-my-posh\bin"
+	}
+	elseif (Test-Path "$($env:LOCALAPPDATA)\Programs\oh-my-posh") {
+		$path += ";$($env:LOCALAPPDATA)\Programs\oh-my-posh\bin"
+	}
+	[System.Environment]::SetEnvironmentVariable('Path', $path, 'User')
 }
