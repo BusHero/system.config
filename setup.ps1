@@ -1,8 +1,8 @@
 Write-Host 'Setup Powershell ... '
 
 & "${PSScriptRoot}\powershell\setup.ps1"
+& $PROFILE.CurrentUserAllHosts
 & "${PSScriptRoot}\powershell\test.ps1"
-& $PROFILE
 
 Write-Host 'Setup oh-my-posh ... '
 
