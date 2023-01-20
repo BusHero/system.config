@@ -14,10 +14,13 @@ else {
 
 	$path = [System.Environment]::GetEnvironmentVariable('Path', 'user')
 	if (Test-Path "$(${env:ProgramFiles(x86)})\oh-my-posh") {
-		$path += ";$(${env:ProgramFiles(x86)})\oh-my-posh\bin"
+		$ohmyposhPath = ";$(${env:ProgramFiles(x86)})\oh-my-posh\bin"
 	}
 	elseif (Test-Path "$($env:LOCALAPPDATA)\Programs\oh-my-posh") {
-		$path += ";$($env:LOCALAPPDATA)\Programs\oh-my-posh\bin"
+		$ohmyposhPath = ";$($env:LOCALAPPDATA)\Programs\oh-my-posh\bin"
 	}
-	[System.Environment]::SetEnvironmentVariable('Path', $path, 'User')
+
+	[System.Environment]::SetEnvironmentVariable('Path', "${path};${ohmyposhPath}", 'User')
+	[System.Environment]::SetEnvironmentVariable('Path', "${path};${ohmyposhPath}", 'Process')
+	$env:Path += $ohmyposhPath
 }
