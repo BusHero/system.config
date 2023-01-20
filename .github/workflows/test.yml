@@ -8,3 +8,5 @@ jobs:
       - uses: actions/checkout@v3
       - name: Run setup.ps1
         run: .\setup.ps1
+      - name: Run test.ps1
+        run: .\test.ps1

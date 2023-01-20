@@ -13,7 +13,6 @@ Describe 'miscellenious' {
 			$res = TabExpansion2 -inputScript 'oh-my-posh ' -cursorColumn 10
 			$res.CompletionMatches | Should -Not -BeNullOrEmpty
 		}
-
 		AfterAll {
 			Set-Location -Path $path
 		}

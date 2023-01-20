@@ -2,12 +2,10 @@ Write-Host 'Setup Powershell ... '
 
 & "${PSScriptRoot}\powershell\setup.ps1"
 & $PROFILE.CurrentUserAllHosts
-& "${PSScriptRoot}\powershell\test.ps1"
 
 Write-Host 'Setup oh-my-posh ... '
 
 & "${PSScriptRoot}\ohmyposh\setup.ps1"
-& "${PSScriptRoot}\ohmyposh\test.ps1"
 # Write-Host 'Setup Windows Terminal ... '
 # . "${PSScriptRoot}\WindowsTerminal\setup.ps1"
 
