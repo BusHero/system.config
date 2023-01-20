@@ -1,7 +1,7 @@
 New-Item `
 	-ItemType Directory `
 	-Path "${env:LOCALAPPDATA}\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\" `
-	-Force
+	-Force > $null
 
 Copy-Item `
 	-Path "${PSScriptRoot}\resources\settings.json" `
