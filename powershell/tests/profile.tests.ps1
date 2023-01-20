@@ -18,18 +18,9 @@ Describe 'powershell' {
 		}
 
 		It 'Profile should have the right data' {
-			$first = Get-Content `
-				-Path $profilePath `
-				-ErrorAction Ignore
-			$second = Get-Content `
-				-Path "${PSScriptRoot}\..\resources\profile.ps1" `
-				-ErrorAction Ignore
-			Compare-Object `
-				-ReferenceObject $first `
-				-DifferenceObject $second `
-				-CaseSensitive `
-				-OutVariable result
-			$result | Should -BeNullOrEmpty -Because 'files should be the same'
+			$first = Get-FileHash -Path $profilePath
+			$second = Get-FileHash -Path "${PSScriptRoot}\..\resources\profile.ps1"
+			$first.Hash | Should -Be $second.Hash -Because 'files should be the same'
 		}
 
 		It 'Run profile' {
@@ -79,18 +70,9 @@ Describe 'scripts folder' -ForEach @(
 		}
 
 		It 'MatchContent' {
-			$first = Get-Content `
-				-Path $scriptPath `
-				-ErrorAction Ignore
-			$second = Get-Content `
-				-Path $_ `
-				-ErrorAction Ignore
-			Compare-Object `
-				-ReferenceObject $first `
-				-DifferenceObject $second `
-				-CaseSensitive `
-				-OutVariable result
-			$result | Should -BeNullOrEmpty -Because 'files should be the same'
+			$first = Get-FileHash -Path $scriptPath
+			$second = Get-FileHash -Path $_
+			$first.Hash | Should -Be $second.Hash -Because 'files should be the same'
 		}
 
 		It 'IsValid' {
