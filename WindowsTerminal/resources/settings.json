@@ -130,7 +130,7 @@
 				"backgroundImageStretchMode": "none",
 				"commandline": "dotnet fsi",
 				"guid": "{f6b87c83-2a3e-4532-a00f-a6718dc741b3}",
-				"icon": "C:\\.config\\WindowsTerminal\\fsharp-32x32.png",
+				"icon": "%USERPROFILE%\\.config\\WindowsTerminal\\fsharp-32x32.png",
 				"name": "fSharp"
 			},
 			{
