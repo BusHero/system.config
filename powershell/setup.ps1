@@ -71,4 +71,4 @@ Copy-Item `
 	-Recurse `
 	-ErrorAction Ignore
 
-. $PROFILE.CurrentUserAllHosts
+. $PROFILE

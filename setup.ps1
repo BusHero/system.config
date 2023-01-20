@@ -2,6 +2,7 @@ Write-Host 'Setup Powershell ... '
 
 & "${PSScriptRoot}\powershell\setup.ps1"
 & "${PSScriptRoot}\powershell\test.ps1"
+& $PROFILE
 
 Write-Host 'Setup oh-my-posh ... '
 
