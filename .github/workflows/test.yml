@@ -7,21 +7,14 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Run setup.ps1
-        run: .\setup.ps1
-      - name: Run test.ps1
         run: |
-          if (Test-Path "$(${env:ProgramFiles(x86)})\oh-my-posh") {
-            echo 'Here'
-            echo "%ProgramFiles(x86)%\oh-my-posh\bin" | Out-File `
-              -FilePath $env:GITHUB_PATH `
-              -Encoding utf8 `
-              -Append
-          }
-          elseif (Test-Path "$($env:LOCALAPPDATA)\Programs\oh-my-posh") {
-            echo 'No, Here'
-            echo '%LOCALAPPDATA%\Programs\oh-my-posh\bin' | Out-File `
-              -FilePath $env:GITHUB_PATH `
-              -Encoding utf8 `
-              -Append
-          }
-          .\test.ps1
+          .\setup.ps1
+      - name: setup path
+        run: |
+          Write-Output "$($env:LocalAppData)\Programs\oh-my-posh\bin" | Out-File `
+            -FilePath $env:GITHUB_PATH `
+            -Encoding utf8 `
+            -Append
+          Test-Path "$($env:LocalAppData)\Programs\oh-my-posh"
+      - name: Run test.ps1
+        run: .\test.ps1
