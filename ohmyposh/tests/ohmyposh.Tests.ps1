@@ -24,6 +24,13 @@ Describe 'ohmyposh' {
 		$result | Should -BeNullOrEmpty -Because 'files should be the same'
 	}
 
+	It 'Valid Schema' {
+		$response = Invoke-WebRequest -Uri https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json
+		$schema = $response.Content
+		$json = Get-Content -Path "${PSScriptRoot}\..\resources\settings.json" | Out-String
+		Test-Json -Json $json -Schema $schema | Should -BeTrue
+	}
+
 	Context 'autocompletion' {
 		BeforeAll {
 			$path = Get-Location
