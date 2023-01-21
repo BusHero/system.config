@@ -13,6 +13,9 @@ Write-Host 'Setup choco ... '
 Write-Host 'Setup winget ... '
 & "${PSScriptRoot}\winget\setup.ps1"
 
+Write-Host 'Setup dotnet ... '
+& "${PSScriptRoot}\dotnet\setup.ps1"
+
 # Write-Host 'Setup Neo vim ... '
 # . "${PSSCriptRoot}\nvim\setup.ps1"
 

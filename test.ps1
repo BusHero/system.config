@@ -12,3 +12,6 @@ Write-Host 'Setup chocolately ... '
 
 Write-Host 'Setup winget ... '
 & "${PSScriptRoot}\winget\setup.ps1"
+
+Write-Host 'Setup dotnet ... '
+& "${PSScriptRoot}\dotnet\setup.ps1"
