@@ -10,6 +10,9 @@ Write-Host 'Setup Windows Terminal ... '
 Write-Host 'Setup choco ... '
 & "${PSScriptRoot}\chocolately\setup.ps1"
 
+Write-Host 'Setup winget ... '
+& "${PSScriptRoot}\winget\setup.ps1"
+
 # Write-Host 'Setup Neo vim ... '
 # . "${PSSCriptRoot}\nvim\setup.ps1"
 
