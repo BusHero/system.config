@@ -6,3 +6,6 @@ Write-Output 'ohmyposh ... '
 
 Write-Output 'WindowsTerminal ... '
 & "${PSScriptRoot}\WindowsTerminal\test.ps1"
+
+Write-Host 'Setup chocolately ... '
+& "${PSScriptRoot}\chocolately\setup.ps1"

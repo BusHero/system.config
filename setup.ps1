@@ -7,6 +7,9 @@ Write-Host 'Setup oh-my-posh ... '
 Write-Host 'Setup Windows Terminal ... '
 & "${PSScriptRoot}\WindowsTerminal\setup.ps1"
 
+Write-Host 'Setup choco ... '
+& "${PSScriptRoot}\chocolately\setup.ps1"
+
 # Write-Host 'Setup Neo vim ... '
 # . "${PSSCriptRoot}\nvim\setup.ps1"
 
