@@ -87,7 +87,7 @@
 				"backgroundImageOpacity": 0.5,
 				"backgroundImageStretchMode": "none",
 				"colorScheme": "Campbell",
-				"commandline": "\"C:\\Program Files\\PowerShell\\7\\pwsh.exe\"",
+				"commandline": "pwsh",
 				"elevate": true,
 				"guid": "{aa934ce8-8666-4d02-8e3e-978e96d8f2ff}",
 				"hidden": false,
