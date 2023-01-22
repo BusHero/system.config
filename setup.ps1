@@ -22,6 +22,8 @@ Write-Host 'Setup python ... '
 Write-Host 'Setup VSCode ... '
 & "${PSScriptRoot}\code\setup.ps1"
 
+Write-Host 'Setup Sysinternals ... '
+& "${PSScriptRoot}\sysinternals\setup.ps1"
 # Write-Host 'Setup Neo vim ... '
 # . "${PSSCriptRoot}\nvim\setup.ps1"
 

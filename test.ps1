@@ -21,3 +21,6 @@ Write-Host 'Setup python ... '
 
 Write-Host 'Setup VSCode ... '
 & "${PSScriptRoot}\code\setup.ps1"
+
+Write-Host 'Setup sysinternals ... '
+& "${PSScriptRoot}\sysinternals\setup.ps1"
