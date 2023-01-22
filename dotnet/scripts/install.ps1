@@ -15,5 +15,5 @@ elseif (Get-Command `
 		-Name 'choco' `
 		-ErrorAction Ignore `
 		-WarningAction Ignore) {
-	choco install dotnet
+	choco install dotnet -y
 }

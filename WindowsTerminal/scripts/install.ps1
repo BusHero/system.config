@@ -15,7 +15,7 @@ elseif (Get-Command -Name 'choco' -ErrorAction Ignore -WarningAction Ignore) {
 		-Uri https://aka.ms/Microsoft.VCLibs.x64.14.00.Desktop.appx `
 		-OutFile $temp.FullName
 	Add-AppxPackage -Path $temp.FullName
-	choco install microsoft-windows-terminal
+	choco install microsoft-windows-terminal -y
 }
 elseif (Get-Command -Name 'scoop' -ErrorAction Ignore -WarningAction Ignore) {
 	scoop bucket add extras
