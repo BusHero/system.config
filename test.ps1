@@ -18,3 +18,6 @@ Write-Host 'Setup dotnet ... '
 
 Write-Host 'Setup python ... '
 & "${PSScriptRoot}\python\setup.ps1"
+
+Write-Host 'Setup VSCode ... '
+& "${PSScriptRoot}\code\setup.ps1"
