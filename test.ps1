@@ -24,3 +24,6 @@ Write-Host 'Setup VSCode ... '
 
 Write-Host 'Setup sysinternals ... '
 & "${PSScriptRoot}\sysinternals\test.ps1"
+
+Write-Host 'Setup git ... '
+& "${PSScriptRoot}\git\test.ps1"
