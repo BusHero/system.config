@@ -1,6 +1,0 @@
-.git/
-.vscode/
-images/
-Dockerfile
-.dockerignore
-*.dockerfile
