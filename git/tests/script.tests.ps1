@@ -34,4 +34,22 @@ Describe 'git.ps1' -ForEach @(
 		}
 		$LASTEXITCODE | Should -Be 0 -Because 'script should have no errors'
 	}
+
+	Context 'autocompletion' {
+		BeforeAll {
+			$path = Get-Location
+			Set-Location -Path $TestDrive
+		}
+
+		It '<shell>.autocompletion' {
+			$block = {
+				TabExpansion2 -inputScript 'git ' -cursorColumn 4 | Select-Object -ExpandProperty CompletionMatches
+			}
+			$res = & $shell -Command "${block}"
+			$res | Should -Not -BeNullOrEmpty
+		}
+		AfterAll {
+			Set-Location -Path $path
+		}
+	}
 }
