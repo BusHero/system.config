@@ -31,6 +31,8 @@ Write-Host 'Setup git ... '
 Write-Host 'Setup csharprepl ... '
 & "${PSScriptRoot}\csharprepl\setup.ps1"
 
+Write-Host 'Setup nuke ... '
+& "${PSScriptRoot}\nuke\setup.ps1"
 
 # Write-Host 'Setup Neo vim ... '
 # . "${PSSCriptRoot}\nvim\setup.ps1"

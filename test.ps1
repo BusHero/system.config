@@ -30,3 +30,6 @@ Write-Host 'git ... '
 
 Write-Host 'csharprepl ... '
 & "${PSScriptRoot}\csharprepl\test.ps1"
+
+Write-Host 'nuke ... '
+& "${PSScriptRoot}\nuke\test.ps1"
