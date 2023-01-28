@@ -1,38 +1,8 @@
-Write-Output 'Powershell ... '
-& "${PSScriptRoot}\powershell\test.ps1"
+$tools = & "${PSScriptRoot}\tools.ps1"
 
-Write-Output 'ohmyposh ... '
-& "${PSScriptRoot}\ohmyposh\test.ps1"
+[PesterConfiguration]$configuration = New-PesterConfiguration
 
-Write-Output 'WindowsTerminal ... '
-& "${PSScriptRoot}\WindowsTerminal\test.ps1"
+$configuration.Run.Path = $tools | ForEach-Object { "${PSScriptRoot}\${_}\tests" }
+$configuration.Run.Exit = $true
 
-Write-Host 'chocolately ... '
-& "${PSScriptRoot}\chocolately\test.ps1"
-
-Write-Host 'winget ... '
-& "${PSScriptRoot}\winget\test.ps1"
-
-Write-Host 'dotnet ... '
-& "${PSScriptRoot}\dotnet\test.ps1"
-
-Write-Host 'python ... '
-& "${PSScriptRoot}\python\test.ps1"
-
-Write-Host 'VSCode ... '
-& "${PSScriptRoot}\code\test.ps1"
-
-Write-Host 'sysinternals ... '
-& "${PSScriptRoot}\sysinternals\test.ps1"
-
-Write-Host 'git ... '
-& "${PSScriptRoot}\git\test.ps1"
-
-Write-Host 'csharprepl ... '
-& "${PSScriptRoot}\csharprepl\test.ps1"
-
-Write-Host 'nuke ... '
-& "${PSScriptRoot}\nuke\test.ps1"
-
-Write-Host 'node ... '
-& "${PSScriptRoot}\node\test.ps1"
+Invoke-Pester -Configuration $configuration

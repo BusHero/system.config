@@ -25,7 +25,7 @@ Describe 'git.ps1' -ForEach @(
 			-WarningAction Ignore
 		$first.Hash | Should -Be $second.Hash -Because 'files should be the same'
 	}
-	It 'IsValid' {
+	It '<Shell>.IsValid' {
 		$result = & $Shell `
 			-NoProfile `
 			-File "${PSScriptRoot}\..\resources\git.ps1"

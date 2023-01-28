@@ -4,10 +4,3 @@ if (! (Get-InstalledModule -Name 'Terminal-Icons' -ErrorAction Ignore -WarningAc
 		-Scope CurrentUser `
 		-Force
 }
-
-if (! (Get-InstalledModule -Name 'posh-git' -ErrorAction Ignore -WarningAction Ignore)) {
-	Install-Module `
-		-Name posh-git `
-		-Scope CurrentUser `
-		-Force
-}

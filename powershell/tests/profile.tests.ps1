@@ -26,7 +26,7 @@ Describe 'powershell' {
 		It 'Run profile' {
 			$result = & "$_" `
 				-NoProfile `
-				-Command ". ${profilePath}; if (`$error) { exit 1 }"
+				-File $profilePath
 			if ($result) {
 				Write-Host "${result}"
 			}
