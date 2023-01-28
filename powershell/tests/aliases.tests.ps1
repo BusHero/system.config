@@ -11,7 +11,7 @@ Describe '<alias>==><definition>' -ForEach @(
 		$actualAlias | Should -Not -BeNullOrEmpty
 	}
 
-	It '=<Definition>' {
+	It 'rightAlias' {
 		$actualAlias.Definition | Should -Be $Definition
 	}
 }
