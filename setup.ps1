@@ -27,6 +27,11 @@ Write-Host 'Setup Sysinternals ... '
 
 Write-Host 'Setup git ... '
 & "${PSScriptRoot}\git\setup.ps1"
+
+Write-Host 'Setup csharprepl ... '
+& "${PSScriptRoot}\csharprepl\setup.ps1"
+
+
 # Write-Host 'Setup Neo vim ... '
 # . "${PSSCriptRoot}\nvim\setup.ps1"
 

@@ -7,23 +7,26 @@ Write-Output 'ohmyposh ... '
 Write-Output 'WindowsTerminal ... '
 & "${PSScriptRoot}\WindowsTerminal\test.ps1"
 
-Write-Host 'Setup chocolately ... '
+Write-Host 'chocolately ... '
 & "${PSScriptRoot}\chocolately\test.ps1"
 
-Write-Host 'Setup winget ... '
+Write-Host 'winget ... '
 & "${PSScriptRoot}\winget\test.ps1"
 
-Write-Host 'Setup dotnet ... '
+Write-Host 'dotnet ... '
 & "${PSScriptRoot}\dotnet\test.ps1"
 
-Write-Host 'Setup python ... '
+Write-Host 'python ... '
 & "${PSScriptRoot}\python\test.ps1"
 
-Write-Host 'Setup VSCode ... '
+Write-Host 'VSCode ... '
 & "${PSScriptRoot}\code\test.ps1"
 
-Write-Host 'Setup sysinternals ... '
+Write-Host 'sysinternals ... '
 & "${PSScriptRoot}\sysinternals\test.ps1"
 
-Write-Host 'Setup git ... '
+Write-Host 'git ... '
 & "${PSScriptRoot}\git\test.ps1"
+
+Write-Host 'csharprepl ... '
+& "${PSScriptRoot}\csharprepl\test.ps1"
