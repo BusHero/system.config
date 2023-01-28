@@ -33,3 +33,6 @@ Write-Host 'csharprepl ... '
 
 Write-Host 'nuke ... '
 & "${PSScriptRoot}\nuke\test.ps1"
+
+Write-Host 'node ... '
+& "${PSScriptRoot}\node\test.ps1"
