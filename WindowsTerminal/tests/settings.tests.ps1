@@ -18,7 +18,7 @@ Describe '<_>' -ForEach $paths {
 
 Describe 'WindowsTerminal.settings.json' {
 	BeforeAll {
-		$path = "$($env:LOCALAPPDATA)\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json"
+		$path = "$($env:LOCALAPPDATA)\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json"
 	}
 
 	It 'oh my posh file exists' {

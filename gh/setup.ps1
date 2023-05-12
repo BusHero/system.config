@@ -1,7 +1,6 @@
 & "${PSScriptRoot}\scripts\install.ps1"
 
-$path = Split-Path `
-	-Path $PROFILE.CurrentUserAllHosts
+$path = Split-Path -Path $PROFILE.CurrentUserAllHosts
 
 New-Item `
 	-Path "${path}\ProfileScripts" `
@@ -9,5 +8,5 @@ New-Item `
 	-Force > $null
 
 Copy-Item `
-	-Path "${PSScriptRoot}\resources\dotnet.ps1" `
+	-Path "${PSScriptRoot}\resources\gh.ps1" `
 	-Destination "${path}\ProfileScripts\"

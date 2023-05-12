@@ -5,10 +5,16 @@ if (Get-Command `
 	return
 }
 
-if (Get-Command -Name 'winget' -ErrorAction Ignore -WarningAction Ignore) {
-	winget install -e --id Microsoft.WindowsTerminal
+if (Get-Command `
+		-Name 'winget' `
+		-ErrorAction Ignore `
+		-WarningAction Ignore) {
+	winget install -e --id Microsoft.WindowsTerminal.Preview
 }
-elseif (Get-Command -Name 'choco' -ErrorAction Ignore -WarningAction Ignore) {
+elseif (Get-Command `
+		-Name 'choco' `
+		-ErrorAction Ignore `
+		-WarningAction Ignore) {
 	Import-Module Appx -UseWindowsPowerShell
 	$temp = New-TemporaryFile
 	Invoke-WebRequest `
@@ -17,7 +23,10 @@ elseif (Get-Command -Name 'choco' -ErrorAction Ignore -WarningAction Ignore) {
 	Add-AppxPackage -Path $temp.FullName
 	choco install microsoft-windows-terminal -y
 }
-elseif (Get-Command -Name 'scoop' -ErrorAction Ignore -WarningAction Ignore) {
+elseif (Get-Command `
+		-Name 'scoop' `
+		-ErrorAction Ignore `
+		-WarningAction Ignore) {
 	scoop bucket add extras
 	scoop install windows-terminal
 }

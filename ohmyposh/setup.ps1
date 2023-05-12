@@ -10,16 +10,14 @@ Copy-Item `
 	-Destination "$($env:USERPROFILE)\.config\ohmyposh\settings.json" `
 	-Force
 
-$foo = pwsh -NoProfile -Command 'Split-Path -Path $PROFILE.CurrentUserAllHosts'
-$bar = powershell -NoProfile -Command 'Split-Path -Path $PROFILE.CurrentUserAllHosts'
+$path = Split-Path `
+	-Path $PROFILE.CurrentUserAllHosts
 
-foreach ($path in $($foo, $bar)) {
-	New-Item `
-		-Path "${path}\ProfileScripts" `
-		-ItemType Directory `
-		-Force > $null
+New-Item `
+	-Path "${path}\ProfileScripts" `
+	-ItemType Directory `
+	-Force > $null
 
-	Copy-Item `
-		-Path "${PSScriptRoot}\resources\oh-my-posh.ps1" `
-		-Destination "${path}\ProfileScripts\"
-}
+Copy-Item `
+	-Path "${PSScriptRoot}\resources\oh-my-posh.ps1" `
+	-Destination "${path}\ProfileScripts\"

@@ -1,7 +1,9 @@
-if (!(Get-Command `
-			-Name 'choco' `
-			-ErrorAction Ignore `
-			-WarningAction Ignore)) {
+$existingCommand = Get-Command `
+	-Name 'choco' `
+	-ErrorAction Ignore `
+	-WarningAction Ignore
+
+if (!$existingCommand) {
 	Start-Process `
 		-FilePath pwsh `
 		-ArgumentList '-NoProfile', '-File', "${PSScriptRoot}\scripts\install.ps1" `
@@ -10,16 +12,14 @@ if (!(Get-Command `
 		-Wait
 }
 
-$foo = pwsh -NoProfile -Command 'Split-Path -Path $PROFILE.CurrentUserAllHosts'
-$bar = powershell -NoProfile -Command 'Split-Path -Path $PROFILE.CurrentUserAllHosts'
+$path = Split-Path `
+	-Path $PROFILE.CurrentUserAllHosts
 
-foreach ($path in $($foo, $bar)) {
-	New-Item `
-		-Path "${path}\ProfileScripts" `
-		-ItemType Directory `
-		-Force > $null
+New-Item `
+	-Path "${path}\ProfileScripts" `
+	-ItemType Directory `
+	-Force > $null
 
-	Copy-Item `
-		-Path "${PSScriptRoot}\resources\choco.ps1" `
-		-Destination "${path}\ProfileScripts\"
-}
+Copy-Item `
+	-Path "${PSScriptRoot}\resources\choco.ps1" `
+	-Destination "${path}\ProfileScripts\"

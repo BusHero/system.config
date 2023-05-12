@@ -1,21 +1,21 @@
 @(
-	"chocolately",
-	"winget",
-	"git",
+	'chocolately',
+	'winget',
+	'git',
+	'gh'
 
 	# powershell and tools
-	"powershell",
-	"ohmyposh",
-
+	'powershell',
+	'ohmyposh',
 
 	# Dotnet and tools
-	"dotnet",
-	"csharprepl"
-	"nuke",
+	'dotnet',
+	'csharprepl'
+	'nuke',
 
-	"node",
-	"python",
-	"WindowsTerminal",
-	"sysinternals",
-	"code"
+	'node',
+	'python',
+	'WindowsTerminal',
+	'sysinternals',
+	'code'
 )
