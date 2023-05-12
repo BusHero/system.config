@@ -1,1 +1,4 @@
-New-Alias -Name touch -Value New-Item -Force
+New-Alias `
+	-Name touch `
+	-Value New-Item `
+	-Force
