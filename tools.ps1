@@ -17,5 +17,7 @@
 	'python',
 	'WindowsTerminal',
 	'sysinternals',
-	'code'
+	'code',
+
+	'1password'
 )
