@@ -1,3 +1,5 @@
+Write-Host "Install PowerShell Core"
+
 if (Get-Command 'pwsh' -ErrorAction Ignore) {
 	return
 }

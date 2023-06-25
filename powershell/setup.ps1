@@ -1,3 +1,8 @@
+if (!($host.Version.Major -eq 7)) {
+	Write-Host "This script requires PowerShell Core"
+	Exit 1
+}
+
 Set-PSRepository `
 	-Name 'PSGallery' `
 	-InstallationPolicy Trusted
@@ -6,21 +11,9 @@ Set-ExecutionPolicy `
 	-Scope Process `
 	-Force
 
-& "${PSScriptRoot}\scripts\install.ps1"
-& "${PSScriptRoot}\scripts\modules.ps1"
-
-New-Item `
-	-Path (Split-Path -Path $PROFILE.CurrentUserAllHosts -Parent) `
-	-ItemType Directory `
-	-Force > $null
-Copy-Item `
-	-Path "${PSScriptRoot}\resources\profile.ps1" `
-	-Destination $PROFILE.CurrentUserAllHosts
-
-Copy-Item `
-	-Path "${PSScriptRoot}\resources\ProfileScripts" `
-	-Destination (Split-Path -Path $Profile.CurrentUserAllHosts -Parent) `
-	-Recurse `
-	-ErrorAction Ignore
+& "${PSScriptRoot}\scripts\Install-PowershellCore.ps1"
+& "${PSScriptRoot}\scripts\Install-Modules.ps1"
+& "${PSScriptRoot}\scripts\Setup-PowershellCore.ps1"
+& "${PSScriptRoot}\scripts\Setup-WindowsPowershell.ps1"
 
 . $PROFILE.CurrentUserAllHosts
