@@ -17,6 +17,6 @@ Describe '<_>' -ForEach $files {
 	It 'right file' {
 		$hash1 = Get-FileHash -Path $path
 		$hash2 = Get-FileHash -Path $destinationPath
-		$hash1.Hash | Should -Be $hash2.Hash -Because 'files should be the same'
+		$hash1.Hash | Should -Be $hash2.Hash -Because "${path} and ${destinationPath} should have same content"
 	}
 }

@@ -26,9 +26,10 @@ Describe 'WindowsTerminal.settings.json' {
 	}
 
 	It 'right settings' {
+		$path2 = "${PSScriptRoot}\..\resources\settings.json"
 		$hash1 = Get-FileHash -Path $path
-		$hash2 = Get-FileHash "${PSScriptRoot}\..\resources\settings.json"
-		$hash1.Hash | Should -Be $hash2.Hash -Because 'files should be the same '
+		$hash2 = Get-FileHash $path2
+		$hash1.Hash | Should -Be $hash2.Hash -Because "${path} and ${path2} should have same content"
 	}
 
 	It 'Valid Schema' -Skip {
