@@ -1,5 +1,11 @@
 [CmdletBinding()]
 param (
+	[switch]
+	$SkipSetupProfile,
+
+	[switch]
+	$SkipSetupToolProfileScript,
+
 	[Parameter()]
 	[ArgumentCompleter({
 			param ( $commandName,
@@ -12,18 +18,55 @@ param (
 	$tool
 )
 
-if ($tool) {
-	$setupScript = "${PSScriptRoot}\${tool}\setup.ps1"
-	Start-Process `
-		-FilePath pwsh `
-		-Verb RunAs `
-		-ArgumentList "-NoProfile -Command ${setupScript}"
-}
-else {
-	$tools = & "${PSScriptRoot}\tools.ps1"
+if (-not $SkipSetupProfile) {
+	$shells = @(
+		'powershell',
+		'pwsh'
+	)
 
+	foreach ($shell in $shells) {
+		$profilePath = & $Shell `
+			-NoProfile `
+			-Command '$PROFILE.CurrentUserAllHosts'
+		$directory = Split-Path -Path $profilePath
+
+		New-Item `
+			-Path $profilePath `
+			-ItemType SymbolicLink `
+			-Target C:\.config\profile.ps1 `
+			-Force > $null
+
+		New-Item `
+			-Path $directory\ProfileScripts `
+			-ItemType SymbolicLink `
+			-Target C:\.config\ProfileScripts `
+			-Force > $null
+	}
+}
+
+if (-not $SkipSetupToolProfileScript) {
+	$tools = & "${PSScriptRoot}\tools.ps1"
 	foreach ($tool in $tools) {
-		Write-Host "Setup ${tool} ..."
-		& "${PSScriptRoot}\${tool}\setup.ps1"
+		$profileScriptsPath = "C:\.config\${tool}\ProfileScripts"
+
+		$profileScripts = if (Test-Path -Path $profileScriptsPath) {
+			Get-ChildItem `
+				-Path $profileScriptsPath
+		}
+		else {
+			@()
+		}
+
+		foreach ($script in $profileScripts) {
+			$name = Split-Path `
+				-Path $script `
+				-Leaf
+
+			New-Item `
+				-Path "C:\.config\ProfileScripts\${name}" `
+				-ItemType SymbolicLink `
+				-Target $script `
+				-Force > $null
+		}
 	}
 }

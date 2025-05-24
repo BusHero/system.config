@@ -1,14 +1,23 @@
-Describe 'Profile contains no errors' {
+Describe 'Profile' -ForEach @(
+	@{Shell = 'pwsh' }
+	@{Shell = 'powershell' }
+) {
 	BeforeAll {
-		$script:shell = if ($host.Version.Major -eq 5) {
-			'powershell'
-		}
-		else {
-			'pwsh'
-		}
+		$profilePath = & $Shell `
+			-NoProfile `
+			-Command '$PROFILE.CurrentUserAllHosts'
+	}
+	It '<Shell> profile scipt exists' {
+		$profilePath | Should -Exist
 	}
 
-	It 'Run profile' {
+	It 'Match content' {
+		$first = Get-FileHash -Path $profilePath
+		$second = Get-FileHash -Path "${PSScriptRoot}\..\resources\profile.ps1"
+		$first.Hash | Should -Be $second.Hash -Because 'files should be the same'
+	}
+
+	It 'Profile contain no errors' {
 		$result = & "${shell}" `
 			-NoProfile `
 			-File $profile.CurrentUserAllHosts
