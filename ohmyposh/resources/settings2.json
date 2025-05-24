@@ -1,0 +1,15 @@
+{
+	"blocks": [
+		{
+			"type": "prompt",
+			"alignment": "left",
+			"segments": [
+				{
+					"style": "plain",
+					"background": "#ffffff",
+					"type": "os"
+				}
+			]
+		}
+	]
+}

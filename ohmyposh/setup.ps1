@@ -1,5 +1,10 @@
 & "${PSScriptRoot}\scripts\install.ps1"
 
+$shells = @(
+	'pwsh',
+	'powershell'
+)
+
 New-Item `
 	-Path "$($env:USERPROFILE)\.config\ohmyposh" `
 	-ItemType Directory `
@@ -10,14 +15,25 @@ Copy-Item `
 	-Destination "$($env:USERPROFILE)\.config\ohmyposh\settings.json" `
 	-Force
 
-$path = Split-Path `
-	-Path $PROFILE.CurrentUserAllHosts
+foreach ($shell in $shells) {
+	try {
+		$profilePath = & $Shell `
+			-NoProfile `
+			-Command '$PROFILE.CurrentUserAllHosts'
 
-New-Item `
-	-Path "${path}\ProfileScripts" `
-	-ItemType Directory `
-	-Force > $null
+		$path = Split-Path `
+			-Path $profilePath
 
-Copy-Item `
-	-Path "${PSScriptRoot}\resources\oh-my-posh.ps1" `
-	-Destination "${path}\ProfileScripts\"
+		New-Item `
+			-Path "${path}\ProfileScripts" `
+			-ItemType Directory `
+			-Force > $null
+
+		Copy-Item `
+			-Path "${PSScriptRoot}\resources\oh-my-posh.ps1" `
+			-Destination "${path}\ProfileScripts\"
+	}
+	finally {
+
+	}
+}

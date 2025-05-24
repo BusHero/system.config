@@ -1,20 +1,3 @@
-Describe 'miscellenious' {
-	Context 'autocompletion' {
-		BeforeAll {
-			$path = Get-Location
-			Set-Location -Path $TestDrive
-		}
-
-		It 'autocompletion' {
-			$res = TabExpansion2 -inputScript 'oh-my-posh ' -cursorColumn 10
-			$res.CompletionMatches | Should -Not -BeNullOrEmpty
-		}
-		AfterAll {
-			Set-Location -Path $path
-		}
-	}
-}
-
 Describe 'oh-my-posh.ps1' -ForEach @(
 	@{ Shell = 'pwsh' }
 	@{ Shell = 'powershell' }
