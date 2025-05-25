@@ -1,39 +1,41 @@
 & "${PSScriptRoot}\scripts\install.ps1"
 
-$shells = @(
-	'pwsh',
-	'powershell'
-)
-
-New-Item `
-	-Path "$($env:USERPROFILE)\.config\ohmyposh" `
-	-ItemType Directory `
-	-Force > $null
-
-Copy-Item `
-	-Path "${PSScriptRoot}\resources\settings.json" `
-	-Destination "$($env:USERPROFILE)\.config\ohmyposh\settings.json" `
-	-Force
-
-foreach ($shell in $shells) {
-	try {
-		$profilePath = & $Shell `
-			-NoProfile `
-			-Command '$PROFILE.CurrentUserAllHosts'
-
-		$path = Split-Path `
-			-Path $profilePath
-
-		New-Item `
-			-Path "${path}\ProfileScripts" `
-			-ItemType Directory `
-			-Force > $null
-
-		Copy-Item `
-			-Path "${PSScriptRoot}\resources\oh-my-posh.ps1" `
-			-Destination "${path}\ProfileScripts\"
+function New-BackupFile([string] $File) {
+	if (-not(Test-Path -Path $File)) {
+		return
 	}
-	finally {
+	$backup = "${File}_$(Get-Date -Format "yyyyMMdd_HHmmss")"
 
-	}
+	Write-Host 'Moving ' -NoNewline
+	Write-Host $File -ForegroundColor Blue -NoNewline
+	Write-Host ' to ' -NoNewline
+	Write-Host $backup -ForegroundColor Blue -NoNewline
+	Move-Item `
+		-Path $File `
+		-Destination $backup `
+		> $null
+
+	Write-Host ' ✅ Done' -ForegroundColor Green
 }
+
+function New-SymbolicLinkWithBackup(
+	[string] $File,
+	[string] $Target) {
+	New-BackupFile -File $File
+
+	Write-Host "Link " -NoNewline
+	Write-Host $File -ForegroundColor Blue -NoNewline
+	Write-Host ' to ' -NoNewline
+	Write-Host $Target -ForegroundColor Blue -NoNewline
+	New-Item `
+		-Path $File `
+		-ItemType SymbolicLink `
+		-Target $Target `
+		-Force `
+		> $null
+	Write-Host ' ✅ Done' -ForegroundColor Green
+}
+
+New-SymbolicLinkWithBackup `
+	-File "$($env:USERPROFILE)\.config\ohmyposh\settings.json" `
+	-Target "${PSScriptRoot}\resources\settings.json"

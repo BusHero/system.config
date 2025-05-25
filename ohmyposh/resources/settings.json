@@ -22,7 +22,7 @@
           },
           "template": " {{.Icon}}: ",
           "foreground": "#ffffff",
-          "background": "#ffffff",
+          "background": "transparent",
           "type": "os",
           "style": "plain"
         },
