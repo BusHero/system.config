@@ -1,15 +1,43 @@
-$config = . "${PSScriptRoot}\config.ps1"
-. "${PSScriptRoot}\Set-EnvironmentVariables.ps1" -Config $config
+function New-BackupFile([string] $File) {
+	if (-not(Test-Path -Path $File)) {
+		return
+	}
+	$backup = "${File}_$(Get-Date -Format "yyyyMMdd_HHmmss")"
 
-New-Item `
-	-Path "$($env:XDG_CONFIG_HOME)\nvim\lua\" `
-	-ItemType Directory `
-	-Force > $null
-Copy-Item `
-	-Path "${PSScriptRoot}\plugins.lua" `
-	-Destination "$($env:XDG_CONFIG_HOME)\nvim\lua\plugins.lua" `
-	-Force > $null
+	Write-Host 'Moving ' -NoNewline
+	Write-Host $File -ForegroundColor Blue -NoNewline
+	Write-Host ' to ' -NoNewline
+	Write-Host $backup -ForegroundColor Blue -NoNewline
+	Move-Item `
+		-Path $File `
+		-Destination $backup `
+		> $null
 
-. "${PSScriptRoot}\Copy-InitScript.ps1"
+	Write-Host ' ✅ Done' -ForegroundColor Green
+}
 
-nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+function New-SymbolicLinkWithBackup(
+	[string] $File,
+	[string] $Target) {
+	New-BackupFile -File $File
+
+	Write-Host "Link " -NoNewline
+	Write-Host $File -ForegroundColor Blue -NoNewline
+	Write-Host ' to ' -NoNewline
+	Write-Host $Target -ForegroundColor Blue -NoNewline
+	New-Item `
+		-Path $File `
+		-ItemType SymbolicLink `
+		-Target $Target `
+		-Force `
+		> $null
+	Write-Host ' ✅ Done' -ForegroundColor Green
+}
+
+New-SymbolicLinkWithBackup `
+	-File "$($env:USERPROFILE)\AppData\Local\nvim\init.lua" `
+	-Target "${PSScriptRoot}\resources\init.lua"
+
+New-SymbolicLinkWithBackup `
+	-File "$($env:USERPROFILE)\AppData\Local\nvim\plugins.lua" `
+	-Target "${PSScriptRoot}\resources\plugins.lua"
