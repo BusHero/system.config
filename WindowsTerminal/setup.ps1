@@ -2,19 +2,16 @@
 # & "${PSScriptRoot}\scripts\sync.ps1"
 
 function New-BackupFile([string] $File) {
-	if (-not(Test-Path -Path $File)) {
-		return
-	}
-	$backup = "${File}_$(Get-Date -Format "yyyyMMdd_HHmmss")"
+	$item = Get-Item -Path $File
+	$backup = "$($item.BaseName)_$(Get-Date -Format "yyyyMMdd_HHmmss")$($item.Extension)"
 
 	Write-Host 'Moving ' -NoNewline
 	Write-Host $File -ForegroundColor Blue -NoNewline
 	Write-Host ' to ' -NoNewline
 	Write-Host $backup -ForegroundColor Blue -NoNewline
-	Move-Item `
+	Rename-Item `
 		-Path $File `
-		-Destination $backup `
-		> $null
+		-NewName $backup
 
 	Write-Host ' ✅ Done' -ForegroundColor Green
 }
@@ -22,7 +19,11 @@ function New-BackupFile([string] $File) {
 function New-SymbolicLinkWithBackup(
 	[string] $File,
 	[string] $Target) {
-	New-BackupFile -File $File
+
+	switch (Get-Item -Path $File) {
+		{ $_.LinkType -eq 'SymbolicLink' -and $_.LinkTarget -eq $Target } { return; }
+		{ $_.Exists } { New-BackupFile -File $File }
+	}
 
 	Write-Host "Link " -NoNewline
 	Write-Host $File -ForegroundColor Blue -NoNewline
@@ -43,3 +44,6 @@ New-SymbolicLinkWithBackup `
 New-SymbolicLinkWithBackup `
 	-File "$($env:LOCALAPPDATA)\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" `
 	-Target "${PSScriptRoot}\resources\settings.json"
+New-SymbolicLinkWithBackup `
+	-File "$($env:USERPROFILE)\.config\WindowsTerminal" `
+	-Target "${PSScriptRoot}\resources\assets"
