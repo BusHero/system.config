@@ -1,2 +1,2 @@
-$ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
-Import-Module "$ChocolateyProfile"
+# $ChocolateyProfile = "$env:ChocolateyInstall\helpers\chocolateyProfile.psm1"
+# Import-Module "$ChocolateyProfile"

@@ -1,10 +1,3 @@
-vim.cmd [[packadd packer.nvim]]
-
--- Setup packer
-require('packer').startup(function(use)
-  use 'wbthomason/packer.nvim'
-  -- Add your plugins here
-end)
 vim.opt.cc = '80'
 vim.opt.nu = true
 vim.opt.rnu = true
@@ -13,7 +6,7 @@ vim.opt.shiftwidth = 4
 vim.opt.mouse = 'v'
 vim.opt.clipboard = 'unnamed'
 
-require('plugins')
+require('config.lazy')
 
 require'lspconfig'.pyright.setup{}
 local opts = { noremap=true, silent=true }
@@ -49,3 +42,5 @@ require('lspconfig')['pyright'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
 }
+
+require("devcontainer").setup{}

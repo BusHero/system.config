@@ -24,26 +24,26 @@ function CanUsePredictionSource {
 }
 
 
-if ($host.Name -eq 'ConsoleHost') {
-	Import-Module PSReadLine
-}
-if (CanUsePredictionSource) {
-	switch (Get-Module PSReadLine | Select-Object -ExpandProperty Version) {
-		{ $_ -gt '2.2' } {
+# if ($host.Name -eq 'ConsoleHost') {
+# 	Import-Module PSReadLine
+# }
+# if (CanUsePredictionSource) {
+# 	switch (Get-Module PSReadLine | Select-Object -ExpandProperty Version) {
+# 		{ $_ -gt '2.2' } {
 			Set-PSReadLineOption `
 				-PredictionSource History `
 				-PredictionViewStyle ListView `
 				-WarningAction Ignore `
 				-ErrorAction Ignore
-			break
-		}
-		{ $_ -gt '2.1' } {
-			Set-PSReadLineOption `
-				-PredictionSource History `
-				-ErrorAction Ignore `
-				-WarningAction Ignore
-			break
-		}
-	}
-	Set-PSReadLineOption -EditMode Windows
-}
+# 			break
+# 		}
+# 		{ $_ -gt '2.1' } {
+# 			Set-PSReadLineOption `
+# 				-PredictionSource History `
+# 				-ErrorAction Ignore `
+# 				-WarningAction Ignore
+# 			break
+# 		}
+# 	}
+# 	Set-PSReadLineOption -EditMode Windows
+# }

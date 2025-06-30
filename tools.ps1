@@ -12,6 +12,7 @@
 	'dotnet',
 	'csharprepl'
 	'nuke',
+	'devpod'
 
 	'node',
 	'python',

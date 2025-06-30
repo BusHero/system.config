@@ -1,17 +1,14 @@
 function New-BackupFile([string] $File) {
-	if (-not(Test-Path -Path $File)) {
-		return
-	}
-	$backup = "${File}_$(Get-Date -Format "yyyyMMdd_HHmmss")"
+	$item = Get-Item -Path $File
+	$backup = "$($item.BaseName)_$(Get-Date -Format "yyyyMMdd_HHmmss")$($item.Extension)"
 
 	Write-Host 'Moving ' -NoNewline
 	Write-Host $File -ForegroundColor Blue -NoNewline
 	Write-Host ' to ' -NoNewline
 	Write-Host $backup -ForegroundColor Blue -NoNewline
-	Move-Item `
+	Rename-Item `
 		-Path $File `
-		-Destination $backup `
-		> $null
+		-NewName $backup
 
 	Write-Host ' ✅ Done' -ForegroundColor Green
 }
@@ -19,7 +16,11 @@ function New-BackupFile([string] $File) {
 function New-SymbolicLinkWithBackup(
 	[string] $File,
 	[string] $Target) {
-	New-BackupFile -File $File
+
+	switch (Get-Item -Path $File -ErrorAction Ignore) {
+		{ $_.LinkType -eq 'SymbolicLink' -and $_.LinkTarget -eq $Target } { return; }
+		{ $_.Exists } { New-BackupFile -File $File }
+	}
 
 	Write-Host "Link " -NoNewline
 	Write-Host $File -ForegroundColor Blue -NoNewline
@@ -39,5 +40,9 @@ New-SymbolicLinkWithBackup `
 	-Target "${PSScriptRoot}\resources\init.lua"
 
 New-SymbolicLinkWithBackup `
-	-File "$($env:USERPROFILE)\AppData\Local\nvim\plugins.lua" `
-	-Target "${PSScriptRoot}\resources\plugins.lua"
+	-File "$($env:USERPROFILE)\AppData\Local\nvim\lua\config\lazy.lua" `
+	-Target "${PSScriptRoot}\resources\lazy.lua"
+
+New-SymbolicLinkWithBackup `
+	-File "$($env:USERPROFILE)\AppData\Local\nvim\lua\plugins" `
+	-Target "${PSScriptRoot}\resources\plugins"
