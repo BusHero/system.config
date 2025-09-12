@@ -29,18 +29,18 @@ if (-not $SkipSetupProfile) {
 			-NoProfile `
 			-Command '$PROFILE.CurrentUserAllHosts'
 		$directory = Split-Path -Path $profilePath
-
+		write-host $profilePath
 		New-Item `
 			-Path $profilePath `
 			-ItemType SymbolicLink `
 			-Target C:\.config\profile.ps1 `
 			-Force > $null
 
-		New-Item `
-			-Path $directory\ProfileScripts `
-			-ItemType SymbolicLink `
-			-Target C:\.config\ProfileScripts `
-			-Force > $null
+		# New-Item `
+		# 	-Path $directory\ProfileScripts `
+		# 	-ItemType SymbolicLink `
+		# 	-Target C:\.config\ProfileScripts `
+		# 	-Force > $null
 	}
 }
 
