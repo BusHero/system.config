@@ -5,7 +5,6 @@ jobs:
     runs-on: windows-latest
     name: "Test something"
     steps:
-      - uses: actions/checkout@v3
       - name: Run setup.ps1
         run: |
           (iwr https://raw.githubusercontent.com/BusHero/system.config/refs/heads/master/Bootstrap.ps1).Content | Invoke-Expression
