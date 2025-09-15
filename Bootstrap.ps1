@@ -1,13 +1,16 @@
-# [Cmdlet(VerbsDiagnostic.Test, "RequestConfirmationTemplate1", SupportsShouldProcess = true)]
 [CmdletBinding()]
 param(
-    [string] $configFolderName = '.config',
-    [string] $repository = 'system.config',
-    [string] $branch = 'master',
-    [string] $username = 'BusHero',
-
-    [switch] $Force
+    [string] $configFolderName = $env:ConfigFolderName,
+    [string] $repository = $env:ConfigRepository,
+    [string] $branch = $env:ConfigBranch,
+    [string] $username = $env:ConfigUsername
 )
+
+if (-not $configFolderName) { $configFolderName = '.config' }
+if (-not $repository) { $repository = 'system.config' }
+if (-not $branch) { $branch = 'master' }
+if (-not $username) { $username = 'BusHero' }
+
 
 function Get-Timestamp() {
     return Get-Date -Format o | ForEach-Object { $_ -replace ":", "." }
@@ -29,9 +32,23 @@ $configPath = Join-Path `
 
 $configUri = "https://codeload.github.com/${username}/${repository}/zip/refs/heads/${branch}"
     
-if (-not $Force -and $PSCmdlet.ShouldContinue("Download configs from '${configUri}'?", "Install configuration files") -eq $false) {
-    return;
-}
+Write-Host "Config Folder Name: " -NoNewline
+Write-Host $configFolderName -ForegroundColor Blue
+
+Write-Host "Config Repository: " -NoNewline
+Write-Host $repository -ForegroundColor Blue
+
+Write-Host "Config Branch: " -NoNewline
+Write-Host $branch -ForegroundColor Blue
+
+Write-Host "Config Username: " -NoNewline
+Write-Host $username -ForegroundColor Blue
+
+Write-Host "Config Path: " -NoNewline
+Write-Host $configPath -ForegroundColor Blue
+
+Write-Host "Config Uri: " -NoNewline
+Write-Host $configUri -ForegroundColor Blue
 
 Invoke-WebRequest `
     -Uri $configUri `
@@ -41,10 +58,6 @@ try {
     Expand-Archive -Path $tempZipArchiveLocation -DestinationPath $tempZipArchiveContentLocation
 
     if (Test-Path -Path $configPath) {
-        if ($Force -or $PSCmdlet.ShouldContinue("Would you like to overwrite '${configPath}'?", "Install configuration files") -eq $false) {
-            return;
-        }
-
         $backupFolder = Join-Path -Path $configPathParent -ChildPath "${configFolderName}_${timestamp}"
         Move-Item -Path $configPath -Destination $backupFolder
     }
