@@ -1,23 +1,24 @@
 {
     "$help": "https://aka.ms/terminal-documentation",
-    "$schema": "https://aka.ms/terminal-profiles-schema-preview",
+    "$schema": "https://aka.ms/terminal-profiles-schema",
     "actions": [],
     "alwaysOnTop": false,
     "copyFormatting": "none",
     "copyOnSelect": false,
     "defaultProfile": "{574e775e-4f2a-5b96-ac1e-a2962a402336}",
-    "keybindings": [
+    "keybindings": 
+    [
         {
             "id": "Terminal.CopyToClipboard",
             "keys": "ctrl+c"
         },
         {
-            "id": "Terminal.PasteFromClipboard",
-            "keys": "ctrl+v"
-        },
-        {
             "id": "Terminal.FindText",
             "keys": "ctrl+shift+f"
+        },
+        {
+            "id": "Terminal.PasteFromClipboard",
+            "keys": "ctrl+v"
         },
         {
             "id": "Terminal.CloseWindow",
@@ -29,21 +30,26 @@
         }
     ],
     "language": "en-US",
-    "newTabMenu": [
+    "newTabMenu": 
+    [
         {
             "type": "remainingProfiles"
         }
     ],
-    "profiles": {
-        "defaults": {
-            "font": {
+    "profiles": 
+    {
+        "defaults": 
+        {
+            "font": 
+            {
                 "face": "CaskaydiaCove NF"
             },
             "opacity": 69,
             "padding": "7",
             "useAcrylic": true
         },
-        "list": [
+        "list": 
+        [
             {
                 "backgroundImage": "%USERPROFILE%\\.config\\WindowsTerminal\\ps.png",
                 "backgroundImageAlignment": "bottomRight",
@@ -164,6 +170,12 @@
                 "hidden": false,
                 "name": "Developer PowerShell for VS 21",
                 "source": "Windows.Terminal.VisualStudio"
+            },
+            {
+                "guid": "{2cf6f3fa-4d8c-515d-b8ca-14c9eec755ff}",
+                "hidden": false,
+                "name": "Debian",
+                "source": "Microsoft.WSL"
             }
         ]
     },

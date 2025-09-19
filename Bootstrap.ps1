@@ -69,6 +69,10 @@ try {
     Move-Item `
         -Path $downloadedConfigFolder `
         -Destination $configPath
+
+    $setupScript = Join-Path -Path $configPath -ChildPath 'setup.ps1'
+
+    & $setupScript
 }
 finally {
     Remove-Item -Path $tempZipArchiveLocation
