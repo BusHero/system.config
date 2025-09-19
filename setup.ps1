@@ -46,7 +46,10 @@ function New-SymbolicLinkWithBackup(
 	Write-Host ' ✅ Done' -ForegroundColor Green
 }
 
-write-host $PROFILE.CurrentUserAllHosts
+$windowsTerminalConfigPath = Join-Path `
+    -Path $env:USERPROFILE `
+    -ChildPath '.config' `
+    -AdditionalChildPath 'windows-terminal-settings.json'
 
 New-SymbolicLinkWithBackup `
     -File $PROFILE.CurrentUserAllHosts `
@@ -54,8 +57,8 @@ New-SymbolicLinkWithBackup `
 
 New-SymbolicLinkWithBackup `
 	-File "$($env:LOCALAPPDATA)\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json" `
-	-Target "${PSScriptRoot}\resources\settings.json"
+	-Target $windowsTerminalConfigPath
 
 New-SymbolicLinkWithBackup `
 	-File "$($env:LOCALAPPDATA)\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" `
-	-Target "${PSScriptRoot}\resources\settings.json"
+	-Target $windowsTerminalConfigPath
