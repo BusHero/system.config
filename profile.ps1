@@ -14,7 +14,7 @@ $ohMyPoshSettingsFile = Join-Path `
 	-ChildPath '.config' `
 	-AdditionalChildPath 'oh-my-posh-settings.json' `
 	-Resolve
-
+	
 oh-my-posh `
 	--init `
 	--shell pwsh `
