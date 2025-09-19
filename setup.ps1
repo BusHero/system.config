@@ -51,3 +51,11 @@ write-host $PROFILE.CurrentUserAllHosts
 New-SymbolicLinkWithBackup `
     -File $PROFILE.CurrentUserAllHosts `
     -Target profile.ps1
+
+New-SymbolicLinkWithBackup `
+	-File "$($env:LOCALAPPDATA)\Packages\Microsoft.WindowsTerminalPreview_8wekyb3d8bbwe\LocalState\settings.json" `
+	-Target "${PSScriptRoot}\resources\settings.json"
+
+New-SymbolicLinkWithBackup `
+	-File "$($env:LOCALAPPDATA)\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json" `
+	-Target "${PSScriptRoot}\resources\settings.json"
