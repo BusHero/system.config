@@ -9,8 +9,13 @@
 # foreach	($script in $scriptFiles) {
 # 	. $script.FullName
 # }
+$ohMyPoshSettingsFile = Join-Path `
+	-Path $env:USERPROFILE `
+	-ChildPath '.config' `
+	-AdditionalChildPath 'oh-my-posh-settings.json' `
+	-Resolve
 
 oh-my-posh `
 	--init `
 	--shell pwsh `
-	--config "$($env:USERPROFILE)\.config\ohmyposh\settings.json" | Invoke-Expression
+	--config $ohMyPoshSettingsFile | Invoke-Expression

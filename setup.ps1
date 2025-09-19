@@ -1,73 +1,47 @@
 Write-Host setup.ps1
-# [CmdletBinding()]
-# param (
-# 	[switch]
-# 	$SkipSetupProfile,
 
-# 	[switch]
-# 	$SkipSetupToolProfileScript,
+function New-BackupFile([string] $File) {
+	if (-not(Test-Path -Path $File)) {
+		return
+	}
+	$backup = "${File}_$(Get-Date -Format "yyyyMMdd_HHmmss")"
+    
+	Write-Host 'Moving ' -NoNewline
+	Write-Host $File -ForegroundColor Blue -NoNewline
+	Write-Host ' to ' -NoNewline
+	Write-Host $backup -ForegroundColor Blue -NoNewline
+	Move-Item `
+		-Path $File `
+		-Destination $backup `
+		> $null
 
-# 	[Parameter()]
-# 	[ArgumentCompleter({
-# 			param ( $commandName,
-# 				$parameterName,
-# 				$wordToComplete )
-# 			$constants = & 'C:\.config\tools.ps1'
-# 			$constants | Sort-Object | Where-Object { $_.StartsWith($wordToComplete) }
-# 		})]
-# 	[string]
-# 	$tool
-# )
+	Write-Host ' ✅ Done' -ForegroundColor Green
+}
 
-# if (-not $SkipSetupProfile) {
-# 	$shells = @(
-# 		'powershell',
-# 		'pwsh'
-# 	)
+function New-SymbolicLinkWithBackup(
+	[string] $File,
+	[string] $Target) {
 
-# 	foreach ($shell in $shells) {
-# 		$profilePath = & $Shell `
-# 			-NoProfile `
-# 			-Command '$PROFILE.CurrentUserAllHosts'
-# 		$directory = Split-Path -Path $profilePath
-# 		write-host $profilePath
-# 		New-Item `
-# 			-Path $profilePath `
-# 			-ItemType SymbolicLink `
-# 			-Target C:\.config\profile.ps1 `
-# 			-Force > $null
+    $fileAbsolutePath = Resolve-Path -Path $File
+    $targetAbsolutePath = Resolve-Path -Path $Target
 
-# 		# New-Item `
-# 		# 	-Path $directory\ProfileScripts `
-# 		# 	-ItemType SymbolicLink `
-# 		# 	-Target C:\.config\ProfileScripts `
-# 		# 	-Force > $null
-# 	}
-# }
+    New-BackupFile -File $fileAbsolutePath
+	Write-Host "Link " -NoNewline
+	Write-Host $fileAbsolutePath -ForegroundColor Blue -NoNewline
+	Write-Host ' to ' -NoNewline
+	
+    Write-Host $targetAbsolutePath -ForegroundColor Blue -NoNewline
+    New-Item `
+		-Path $fileAbsolutePath `
+		-ItemType SymbolicLink `
+		-Target $targetAbsolutePath `
+		-Force `
+		> $null
+	Write-Host ' ✅ Done' -ForegroundColor Green
+}
 
-# if (-not $SkipSetupToolProfileScript) {
-# 	$tools = & "${PSScriptRoot}\tools.ps1"
-# 	foreach ($tool in $tools) {
-# 		$profileScriptsPath = "C:\.config\${tool}\ProfileScripts"
+write-host $PROFILE.CurrentUserAllHosts
 
-# 		$profileScripts = if (Test-Path -Path $profileScriptsPath) {
-# 			Get-ChildItem `
-# 				-Path $profileScriptsPath
-# 		}
-# 		else {
-# 			@()
-# 		}
-
-# 		foreach ($script in $profileScripts) {
-# 			$name = Split-Path `
-# 				-Path $script `
-# 				-Leaf
-
-# 			New-Item `
-# 				-Path "C:\.config\ProfileScripts\${name}" `
-# 				-ItemType SymbolicLink `
-# 				-Target $script `
-# 				-Force > $null
-# 		}
-# 	}
-# }
+New-SymbolicLinkWithBackup `
+    -File $PROFILE.CurrentUserAllHosts `
+    -Target profile.ps1
