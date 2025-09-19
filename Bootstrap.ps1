@@ -20,7 +20,7 @@ $timestamp = Get-Timestamp
 $zipFolderWithoutLocation
 $tempZipArchiveLocation = Join-Path `
     -Path $env:TEMP `
-    -ChildPath "${repository}_${timestamp}.zip" 
+    -ChildPath "${repository}_${timestamp}.zip"
 $tempZipArchiveContentLocation = Join-Path `
     -Path $env:TEMP `
     -ChildPath "${repository}_${timestamp}"
@@ -31,7 +31,7 @@ $configPath = Join-Path `
     -ChildPath $configFolderName
 
 $configUri = "https://codeload.github.com/${username}/${repository}/zip/refs/heads/${branch}"
-    
+
 Write-Host "Config Folder Name: " -NoNewline
 Write-Host $configFolderName -ForegroundColor Blue
 
@@ -55,7 +55,9 @@ Invoke-WebRequest `
     -OutFile $tempZipArchiveLocation
 
 try {
-    Expand-Archive -Path $tempZipArchiveLocation -DestinationPath $tempZipArchiveContentLocation
+    Microsoft.PowerShell.Archive\Expand-Archive `
+        -Path $tempZipArchiveLocation `
+        -DestinationPath $tempZipArchiveContentLocation
 
     if (Test-Path -Path $configPath) {
         $backupFolder = Join-Path -Path $configPathParent -ChildPath "${configFolderName}_${timestamp}"
